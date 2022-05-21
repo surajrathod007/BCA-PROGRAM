@@ -17,6 +17,11 @@ class ProgramViewModel : ViewModel() {
     val programsList : LiveData<MutableList<Program>>
     get() = _programsList
 
+    val semList = arrayOf("Sem 1","Sem 2","Sem 3","Sem 4","Sem 5","Sem 6")
+    val unitList = arrayOf("Unit 1","Unit 2","Unit 3","Unit 4")
+    val subjectmutableMap = mutableMapOf<Int,Array<String>>()
+
+
     private fun clearPrograms() = _programsList.value?.clear()
 
     private fun refresh(){
@@ -44,5 +49,8 @@ class ProgramViewModel : ViewModel() {
 //                println("Failure is $t")
             }
         })
+    }
+    fun addToSubjectMutableMap(key : Int,list:Array<String>){
+        subjectmutableMap[key] = list
     }
 }

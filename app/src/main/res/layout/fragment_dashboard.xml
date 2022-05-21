@@ -47,8 +47,8 @@
             android:id="@+id/Filterer"
             android:layout_width="match_parent"
             android:layout_height="46dp"
-            android:background="@color/purple_700"
             android:visibility="gone"
+android:background="@color/white"
             android:weightSum="3">
 
             <androidx.appcompat.widget.AppCompatSpinner
