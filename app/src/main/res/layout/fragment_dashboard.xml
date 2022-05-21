@@ -1,14 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.appcompat.widget.LinearLayoutCompat
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.fragments.DashboardFragment">
 
-    <!-- TODO: Update blank fragment layout -->
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:animateLayoutChanges="true">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/dashboardToolbar"
+            app:titleTextColor="@color/design_default_color_on_primary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+           <RelativeLayout
+               android:layout_width="match_parent"
+               android:layout_height="56dp"
+               >
+               <TextView
+                   android:layout_width="wrap_content"
+                   android:layout_height="match_parent"
+                   android:text="Home"
+                   android:gravity="center"
+                   android:textSize="20sp"
+                   android:textColor="@color/design_default_color_on_primary"/>
+
+               <ImageView
+                   android:id="@+id/searchButton"
+                   android:layout_width="56dp"
+                   android:layout_height="56dp"
+                   android:layout_alignParentEnd="true"
+                   android:padding="16dp"
+                   android:src="@drawable/ic_action_search"
+                   app:tint="@color/design_default_color_on_primary" />
+           </RelativeLayout>
+
+        </androidx.appcompat.widget.Toolbar>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/Filterer"
+            android:layout_width="match_parent"
+            android:layout_height="46dp"
+            android:background="@color/purple_700"
+            android:visibility="gone"
+            android:weightSum="3">
+
+            <androidx.appcompat.widget.AppCompatSpinner
+                android:id="@+id/semSpinner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+            <androidx.appcompat.widget.AppCompatSpinner
+                android:id="@+id/subjectSpinner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+            <androidx.appcompat.widget.AppCompatSpinner
+                android:id="@+id/unitSpinner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+    </com.google.android.material.appbar.AppBarLayout>
+
     <TextView
+        android:id="@+id/text"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Home" />
+        android:text="Home"
+        android:gravity="center"/>
 
-</FrameLayout>
+</androidx.appcompat.widget.LinearLayoutCompat>

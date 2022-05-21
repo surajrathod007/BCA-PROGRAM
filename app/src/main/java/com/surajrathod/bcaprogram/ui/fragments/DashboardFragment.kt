@@ -1,10 +1,11 @@
 package com.surajrathod.bcaprogram.ui.fragments
 
 import android.os.Bundle
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.View.GONE
+import android.view.View.VISIBLE
+import androidx.appcompat.widget.LinearLayoutCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.surajrathod.bcaprogram.R
@@ -27,6 +28,7 @@ class DashboardFragment : Fragment() {
     private var param2: String? = null
     lateinit var programViewModel: ProgramViewModel
     lateinit var binding: FragmentDashboardBinding
+    lateinit var filterer : LinearLayoutCompat
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -41,10 +43,17 @@ class DashboardFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_dashboard, container, false)
         binding = FragmentDashboardBinding.bind(view)
+        filterer = binding.Filterer
         programViewModel = ViewModelProvider(this).get(ProgramViewModel::class.java)
-        // Inflate the layout for this fragment
-
+        binding.searchButton.setOnClickListener{
+            enableSearch()
+        }
         return view
+    }
+
+   private fun enableSearch(){
+        if(filterer.visibility==VISIBLE) filterer.visibility = GONE
+        else filterer.visibility = VISIBLE
     }
 
     companion object {
