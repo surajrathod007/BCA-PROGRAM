@@ -5,7 +5,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.surajrathod.bcaprogram.R
+import com.surajrathod.bcaprogram.databinding.FragmentDashboardBinding
+import com.surajrathod.bcaprogram.viewmodel.ProgramViewModel
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -21,7 +25,8 @@ class DashboardFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
-
+    lateinit var programViewModel: ProgramViewModel
+    lateinit var binding: FragmentDashboardBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -34,8 +39,12 @@ class DashboardFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        val view = inflater.inflate(R.layout.fragment_dashboard, container, false)
+        binding = FragmentDashboardBinding.bind(view)
+        programViewModel = ViewModelProvider(this).get(ProgramViewModel::class.java)
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_dashboard, container, false)
+
+        return view
     }
 
     companion object {

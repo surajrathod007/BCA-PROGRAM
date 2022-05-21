@@ -10,7 +10,7 @@ apply plugin: 'kotlin-android-extensions'
 
 android {
     compileSdk 31
-
+    buildToolsVersion '31.0.0'
     defaultConfig {
         applicationId "com.surajrathod.bcaprogram"
         minSdk 21
@@ -33,6 +33,9 @@ android {
     }
     kotlinOptions {
         jvmTarget = '1.8'
+    }
+    buildFeatures{
+        viewBinding true
     }
 }
 
@@ -61,9 +64,9 @@ dependencies {
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.0'
 
     // architecture
-    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1"
-    //implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.3.1"
-    implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.3.1"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.1"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.4.1"
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.4.1"
 
     implementation"androidx.lifecycle:lifecycle-extensions:2.2.0"
 
