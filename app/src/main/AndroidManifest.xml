@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BCAProgram">
         <activity
+            android:name=".ui.DescriptionActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.MainActivity"
             android:exported="true">
             <intent-filter>
