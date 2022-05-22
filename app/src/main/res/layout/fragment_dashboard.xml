@@ -47,25 +47,25 @@
             android:id="@+id/Filterer"
             android:layout_width="match_parent"
             android:layout_height="46dp"
-            android:visibility="gone"
+
 android:background="@color/white"
             android:weightSum="3">
 
             <androidx.appcompat.widget.AppCompatSpinner
                 android:id="@+id/semSpinner"
-                android:layout_width="wrap_content"
+                android:layout_width="70dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1" />
 
             <androidx.appcompat.widget.AppCompatSpinner
                 android:id="@+id/subjectSpinner"
-                android:layout_width="wrap_content"
+                android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1" />
 
             <androidx.appcompat.widget.AppCompatSpinner
                 android:id="@+id/unitSpinner"
-                android:layout_width="wrap_content"
+                android:layout_width="70dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1" />
 

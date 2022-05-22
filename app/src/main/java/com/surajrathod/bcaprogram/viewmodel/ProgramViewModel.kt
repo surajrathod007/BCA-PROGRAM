@@ -21,7 +21,9 @@ class ProgramViewModel : ViewModel() {
     val unitList = arrayOf("Unit 1","Unit 2","Unit 3","Unit 4")
     val subjectmutableMap = mutableMapOf<Int,Array<String>>()
 
-
+    init {
+        createSubjectsMutableMap()
+    }
 
     private fun clearPrograms() = _programsList.value?.clear()
 
@@ -51,9 +53,15 @@ class ProgramViewModel : ViewModel() {
             }
         })
     }
-    fun addToSubjectMutableMap(key : Int,list:Array<String>){
+    fun addToSubjectSMutableMap(key : Int,list:Array<String>){
         subjectmutableMap[key] = list
     }
-
-
+    fun createSubjectsMutableMap(){
+        subjectmutableMap[1] = arrayOf("IPLC","HTML")
+        subjectmutableMap[2] = arrayOf("ACP","DBMS 1","HTML/JS")
+        subjectmutableMap[3] = arrayOf("OOCP","DS_ALGO")
+        subjectmutableMap[4] = arrayOf("CJ","DBMS 2","WPC#")
+        subjectmutableMap[5] = arrayOf("PYTHON","ASP.NET")
+        subjectmutableMap[6] = arrayOf("WEB APP DEV")
+    }
 }
