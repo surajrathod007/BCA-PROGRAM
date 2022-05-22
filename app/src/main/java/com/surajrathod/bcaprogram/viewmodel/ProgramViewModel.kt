@@ -22,6 +22,7 @@ class ProgramViewModel : ViewModel() {
     val subjectmutableMap = mutableMapOf<Int,Array<String>>()
 
 
+
     private fun clearPrograms() = _programsList.value?.clear()
 
     private fun refresh(){
@@ -53,4 +54,6 @@ class ProgramViewModel : ViewModel() {
     fun addToSubjectMutableMap(key : Int,list:Array<String>){
         subjectmutableMap[key] = list
     }
+
+
 }
