@@ -52,6 +52,7 @@ class MainActivity : AppCompatActivity() {
         if(updateDialog.isVisible){
             updateDialog.visibility = GONE
             bottomNavigationView.visibility = VISIBLE
+
         }else{
 
             updateDialog.visibility = VISIBLE
