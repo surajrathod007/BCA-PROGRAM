@@ -14,4 +14,6 @@ interface NetworkCallsInterface {
 
     @GET("get")
     fun checkForUpdates() : Call<AppUpdate>
+
+
 }
