@@ -49,7 +49,6 @@ class DashboardFragment : Fragment() {
         binding = FragmentDashboardBinding.bind(view)
         filterer = binding.Filterer
         programViewModel = ViewModelProvider(this).get(ProgramViewModel::class.java)
-        programViewModel.addToSubjectMutableMap(1, arrayOf("c#","c","c++"))
         with(binding) {
             activity?.let {
                 semSpinner.adapter = spinnerAdapter.createAdapter(it, programViewModel.semList)
