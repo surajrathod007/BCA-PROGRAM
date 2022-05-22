@@ -29,4 +29,10 @@
         app:layout_constraintTop_toTopOf="parent"
         app:navGraph="@navigation/nav_graph" />
 
+    <include
+        android:id="@+id/updateDialog"
+        layout="@layout/update_dialog_layout"
+        android:visibility="gone"
+        />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
