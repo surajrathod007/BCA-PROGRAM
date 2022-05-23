@@ -44,9 +44,7 @@ class ShareFragment : Fragment() {
         btnShare = view.findViewById(R.id.btnShare)
 
 
-        binding.updateCardView.setOnClickListener {
-            startActivity(Intent(activity,DescriptionActivity::class.java))
-        }
+
 
 
         btnShare.setOnClickListener {

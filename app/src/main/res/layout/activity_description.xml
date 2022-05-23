@@ -22,6 +22,7 @@
             android:layout_height="match_parent">
 
             <ImageView
+                android:id="@+id/btnFav"
                 android:layout_marginRight="10dp"
                 android:src="@drawable/ic_baseline_favorite_border_24"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -89,6 +90,7 @@
         android:layout_height="wrap_content">
 
         <TextView
+            android:id="@+id/txtProgram"
             android:textIsSelectable="true"
             android:layout_margin="5dp"
             android:textColor="@color/white"
