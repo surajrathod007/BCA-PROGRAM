@@ -16,6 +16,9 @@ class ProgramViewModel : ViewModel() {
     private val _programsList = MutableLiveData<MutableList<Program>>(mutableListOf())
     val programsList : LiveData<MutableList<Program>>
     get() = _programsList
+    val curSemester = MutableLiveData<String>("Sem 1")
+    val curSubject = MutableLiveData<String>("IPLC")
+    val curUnit = MutableLiveData<String>("Unit 1")
 
     val semList = arrayOf("Sem 1","Sem 2","Sem 3","Sem 4","Sem 5","Sem 6")
     val unitList = arrayOf("Unit 1","Unit 2","Unit 3","Unit 4")
@@ -46,10 +49,9 @@ class ProgramViewModel : ViewModel() {
 
             }
             override fun onFailure(call: Call<List<Program>>, t: Throwable) {
-                Log.e(TAG, "Retrofit Failure : $t", )
-                _programsList.value?.add(Program(404,"Empty"))
+                clearPrograms()
                 refresh()
-//                println("Failure is $t")
+                println("Failure is $t")
             }
         })
     }
