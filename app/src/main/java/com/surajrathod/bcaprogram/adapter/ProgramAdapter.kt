@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.surajrathod.bcaprogram.databinding.ItemProgramBinding
 import com.surajrathod.bcaprogram.model.Program
 import com.surajrathod.bcaprogram.ui.DescriptionActivity
+import java.io.Serializable
 
 class ProgramAdapter(private val list: List<Program>): RecyclerView.Adapter<ProgramAdapter.ViewHolder>() {
     class ViewHolder(binding : ItemProgramBinding):RecyclerView.ViewHolder(binding.root){
@@ -30,7 +31,9 @@ class ProgramAdapter(private val list: List<Program>): RecyclerView.Adapter<Prog
             title.text = if(program.title.length < 75) program.title
             else program.title.substring(0,75)+"..."
             item.setOnClickListener {
-                startActivity(it.context,Intent(it.context,DescriptionActivity::class.java), Bundle())
+               val intent = Intent(it.context,DescriptionActivity::class.java)
+                intent.putExtra("program",program)
+                startActivity(it.context,intent,Bundle())
             }
         }
     }
