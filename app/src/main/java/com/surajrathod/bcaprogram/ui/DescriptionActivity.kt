@@ -39,18 +39,24 @@ class DescriptionActivity : AppCompatActivity() {
 
         favViewModel = ViewModelProvider(this@DescriptionActivity).get(FavouriteViewModel()::class.java)
         favViewModel.setUpDataBase(this)
+       GlobalScope.launch {  setFavIcon(data.id) }
         //favViewModel.favDb.programDao().isFav(data.id).toString()
-
-
-
 
         binding.btnFav.setOnClickListener {
 
             GlobalScope.launch {
-                favViewModel.toggleFavourite(ProgramEntity(data.id,data.title,data.content,data.sem,data.sub,data.unit))
+                favViewModel.toggleFavourite(
+                    ProgramEntity(
+                        data.id,
+                        data.title,
+                        data.content,
+                        data.sem,
+                        data.sub,
+                        data.unit
+                    )
+                )
+                setFavIcon(data.id,)
             }
-
-            Toast.makeText(this@DescriptionActivity,"Added To Fav",Toast.LENGTH_SHORT).show()
         }
 
         txtTitle.text = data.title.toString()
@@ -66,8 +72,10 @@ class DescriptionActivity : AppCompatActivity() {
         supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_baseline_arrow_back_ios_24)
     }
 
-
-
+    private fun setFavIcon(data : Int){
+        if(favViewModel.isFav(data)) binding.btnFav.setImageDrawable(resources.getDrawable(R.drawable.ic_baseline_favorite_24))
+            else binding.btnFav.setImageDrawable(resources.getDrawable(R.drawable.ic_baseline_favorite_border_24))
+    }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {

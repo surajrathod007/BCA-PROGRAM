@@ -37,6 +37,7 @@ class FavouriteViewModel() : ViewModel() {
         }
 //        refresh()  // Cant be called on Background Thread
     }
+    fun isFav(id : Int) = favDb.programDao().isFav(id)
 
     fun getAllPrograms(viewLifecycleOwner: LifecycleOwner){
         clearList()
