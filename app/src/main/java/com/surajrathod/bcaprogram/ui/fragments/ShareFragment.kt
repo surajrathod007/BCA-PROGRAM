@@ -47,7 +47,8 @@ class ShareFragment : Fragment() {
 
 
 
-        btnShare.setOnClickListener {
+
+        binding.btnShare.setOnClickListener {
             val intent = Intent()
             intent.action = Intent.ACTION_SEND
             intent.type = "text/plain"

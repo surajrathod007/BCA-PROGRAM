@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.get
 import com.surajrathod.bcaprogram.R
@@ -40,10 +41,17 @@ class DescriptionActivity : AppCompatActivity() {
         favViewModel.setUpDataBase(this)
         //favViewModel.favDb.programDao().isFav(data.id).toString()
 
-        GlobalScope.launch {
-            println(favViewModel.toggleFavourite(ProgramEntity(data.id,data.title,data.content,data.sem,data.sub,data.unit)))
-        }
 
+
+
+        binding.btnFav.setOnClickListener {
+
+            GlobalScope.launch {
+                favViewModel.toggleFavourite(ProgramEntity(data.id,data.title,data.content,data.sem,data.sub,data.unit))
+            }
+
+            Toast.makeText(this@DescriptionActivity,"Added To Fav",Toast.LENGTH_SHORT).show()
+        }
 
         txtTitle.text = data.title.toString()
         txtSem.text = data.sem.toString()
