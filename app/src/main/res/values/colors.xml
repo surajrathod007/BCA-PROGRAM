@@ -8,4 +8,13 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="alpha_black">#4d2d2d2d</color>
+
+    <color name="action_bar_color">#202d5a</color>
+    <color name="back_color">#131c3d</color>
+    <color name="button_color">#00cc69</color>
+    <color name="text_color">#6b769b</color>
+
+    <color name="sem_color">#4485fd</color>
+    <color name="sub_color">#fe7853</color>
+    <color name="unit_color">#02cc6a</color>
 </resources>

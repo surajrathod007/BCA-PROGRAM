@@ -1,6 +1,7 @@
 package com.surajrathod.bcaprogram.viewmodel
 
 import android.app.Activity
+import android.app.Application
 import android.content.Context
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
@@ -11,19 +12,17 @@ import com.surajrathod.bcaprogram.model.Program
 import com.surajrathod.bcaprogram.room.ProgramDatabase
 import com.surajrathod.bcaprogram.room.ProgramEntity
 
-class FavouriteViewModel(val context: Context) : ViewModel() {
+class FavouriteViewModel() : ViewModel() {
     private val _favProgramsList = MutableLiveData<MutableList<ProgramEntity>>(mutableListOf())
     val favProgramsList : LiveData<MutableList<ProgramEntity>>
         get() = _favProgramsList
-    lateinit var favDb : ProgramDatabase
-    init {
-        setUpDataBase(context)
-    }
+    private lateinit var favDb : ProgramDatabase
+
     private fun clearList() = _favProgramsList.value?.clear()
     private fun refresh(){
         _favProgramsList.value = _favProgramsList.value
     }
-    private fun setUpDataBase(context : Context){
+     fun setUpDataBase(context : Context){
          favDb = ProgramDatabase.getDatabase(context)
     }
 
@@ -36,8 +35,9 @@ class FavouriteViewModel(val context: Context) : ViewModel() {
             favDb.programDao().removeFav(id)
             _favProgramsList.value?.remove(programEntity)
         }
-        refresh()
+//        refresh()  // Cant be called on Background Thread
     }
+    fun isFav(id : Int) = favDb.programDao().isFav(id)
 
     fun getAllPrograms(viewLifecycleOwner: LifecycleOwner){
         clearList()

@@ -4,9 +4,12 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/AAA/AndroidStudioProjects/BCA-PROGRAM/app/src/main/res/drawable/dialog_background.xml" value="0.1895" />
-        <entry key="..\:/Users/AAA/AndroidStudioProjects/BCA-PROGRAM/app/src/main/res/layout/activity_description.xml" value="0.2630208333333333" />
+        <entry key="..\:/Users/AAA/AndroidStudioProjects/BCA-PROGRAM/app/src/main/res/drawable/sub_bg.xml" value="0.1895" />
+        <entry key="..\:/Users/AAA/AndroidStudioProjects/BCA-PROGRAM/app/src/main/res/layout/activity_description.xml" value="0.25" />
         <entry key="..\:/Users/AAA/AndroidStudioProjects/BCA-PROGRAM/app/src/main/res/layout/activity_main.xml" value="0.2630208333333333" />
         <entry key="..\:/Users/AAA/AndroidStudioProjects/BCA-PROGRAM/app/src/main/res/layout/fragment_dashboard.xml" value="0.33" />
+        <entry key="..\:/Users/AAA/AndroidStudioProjects/BCA-PROGRAM/app/src/main/res/layout/fragment_favourites.xml" value="0.2337962962962963" />
+        <entry key="..\:/Users/AAA/AndroidStudioProjects/BCA-PROGRAM/app/src/main/res/layout/fragment_share.xml" value="0.22819701762313602" />
         <entry key="..\:/Users/AAA/AndroidStudioProjects/BCA-PROGRAM/app/src/main/res/layout/item_program.xml" value="0.33" />
         <entry key="..\:/Users/AAA/AndroidStudioProjects/BCA-PROGRAM/app/src/main/res/layout/loading_screen.xml" value="0.2630208333333333" />
         <entry key="..\:/Users/AAA/AndroidStudioProjects/BCA-PROGRAM/app/src/main/res/layout/update_dialog.xml" value="0.25" />

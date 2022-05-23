@@ -10,8 +10,10 @@ import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import com.surajrathod.bcaprogram.R
+import com.surajrathod.bcaprogram.databinding.FragmentShareBinding
 import com.surajrathod.bcaprogram.model.AppUpdate
 import com.surajrathod.bcaprogram.network.NetworkService
+import com.surajrathod.bcaprogram.ui.DescriptionActivity
 import kotlinx.android.synthetic.main.fragment_share.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -25,6 +27,7 @@ class ShareFragment : Fragment() {
 
     lateinit var btnShare : Button
     lateinit var app : Update
+    lateinit var binding: FragmentShareBinding
     override fun onCreate(savedInstanceState: Bundle?) {
 
         loadUpdate()
@@ -37,12 +40,15 @@ class ShareFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_share, container, false)
 
+        binding = FragmentShareBinding.inflate(inflater,container,false)
         btnShare = view.findViewById(R.id.btnShare)
 
 
 
 
-        btnShare.setOnClickListener {
+
+
+        binding.btnShare.setOnClickListener {
             val intent = Intent()
             intent.action = Intent.ACTION_SEND
             intent.type = "text/plain"
@@ -57,7 +63,7 @@ class ShareFragment : Fragment() {
 
 
 
-        return  view
+        return binding.root
 
 
     }

@@ -3,23 +3,27 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:backgroundTint="@color/back_color"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.fragments.ShareFragment">
 
     <androidx.appcompat.widget.LinearLayoutCompat
+        android:background="@color/back_color"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <androidx.appcompat.widget.Toolbar
+            android:background="@color/action_bar_color"
             app:title="Share Our App"
-
+            app:titleTextColor="#B3FFFFFF"
             android:elevation="10dp"
 
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize" />
 
         <TextView
+            android:textColor="@color/text_color"
             android:layout_margin="10dp"
             android:text="Share Our App With Your Friends!"
             android:layout_gravity="center_horizontal"
@@ -34,11 +38,13 @@
             android:layout_margin="10dp"
             android:id="@+id/btnShare"
             android:text="Click Here To Share"
+            android:backgroundTint="@color/button_color"
             android:textAllCaps="false"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
         <TextView
+            android:textColor="@color/text_color"
             android:text="Change Log :"
             android:textSize="20sp"
             android:textAlignment="center"
@@ -46,11 +52,14 @@
             android:layout_height="wrap_content"/>
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/updateCardView"
+            android:backgroundTint="@color/action_bar_color"
             android:layout_margin="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <TextView
-                android:textColor="@color/black"
+
+                android:textColor="@color/text_color"
                 android:layout_margin="5dp"
                 android:text="Update Message"
                 android:id="@+id/txtMessage"
