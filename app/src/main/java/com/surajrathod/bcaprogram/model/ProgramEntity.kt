@@ -1,12 +1,11 @@
-package com.surajrathod.bcaprogram.room
+package com.surajrathod.bcaprogram.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-
+import java.io.Serializable
 
 @Entity
-data class ProgramEntity(
-
+data class ProgramEntity (
     @PrimaryKey(autoGenerate = false)
     val id : Int,
     val title : String,
@@ -14,4 +13,4 @@ data class ProgramEntity(
     val sem : String = "",
     val sub : String = "",
     val unit : String = ""
-)
+):Serializable

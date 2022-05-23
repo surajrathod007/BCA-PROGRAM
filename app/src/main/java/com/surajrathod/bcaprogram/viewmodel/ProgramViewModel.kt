@@ -1,20 +1,17 @@
 package com.surajrathod.bcaprogram.viewmodel
 
-import android.content.ContentValues.TAG
-import android.util.Log
-import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.surajrathod.bcaprogram.model.Program
+import com.surajrathod.bcaprogram.model.ProgramEntity
 import com.surajrathod.bcaprogram.network.NetworkService
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 class ProgramViewModel : ViewModel() {
-    private val _programsList = MutableLiveData<MutableList<Program>>(mutableListOf())
-    val programsList : LiveData<MutableList<Program>>
+    private val _programsList = MutableLiveData<MutableList<ProgramEntity>>(mutableListOf())
+    val programsList : LiveData<MutableList<ProgramEntity>>
     get() = _programsList
     val curSemester = MutableLiveData<String>("Sem 1")
     val curSubject = MutableLiveData<String>("IPLC")
@@ -38,8 +35,8 @@ class ProgramViewModel : ViewModel() {
 
         val response = NetworkService.networkInstance.fetchPrograms(sem, sub, unit)
 //        println("Response is $response")
-        response.enqueue(object : Callback<List<Program>>{
-            override fun onResponse(call: Call<List<Program>>, response: Response<List<Program>>) {
+        response.enqueue(object : Callback<List<ProgramEntity>>{
+            override fun onResponse(call: Call<List<ProgramEntity>>, response: Response<List<ProgramEntity>>) {
                 response.body()?.let {
                     clearPrograms()
                     _programsList.value?.addAll(it)
@@ -48,7 +45,7 @@ class ProgramViewModel : ViewModel() {
                 }
 
             }
-            override fun onFailure(call: Call<List<Program>>, t: Throwable) {
+            override fun onFailure(call: Call<List<ProgramEntity>>, t: Throwable) {
                 clearPrograms()
                 refresh()
                 println("Failure is $t")

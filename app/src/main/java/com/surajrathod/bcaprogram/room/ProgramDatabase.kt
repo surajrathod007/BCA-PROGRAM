@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.surajrathod.bcaprogram.model.ProgramEntity
 
 
 @Database(entities = [ProgramEntity::class], version = 1)

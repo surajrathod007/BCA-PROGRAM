@@ -1,21 +1,16 @@
 package com.surajrathod.bcaprogram.ui
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
-import android.view.View
-import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.get
 import com.surajrathod.bcaprogram.R
 import com.surajrathod.bcaprogram.databinding.ActivityDescriptionBinding
-import com.surajrathod.bcaprogram.model.Program
-import com.surajrathod.bcaprogram.room.ProgramEntity
+import com.surajrathod.bcaprogram.model.ProgramEntity
+
 import com.surajrathod.bcaprogram.viewmodel.FavouriteViewModel
 import kotlinx.android.synthetic.main.activity_description.*
 import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 
 class DescriptionActivity : AppCompatActivity() {
@@ -34,7 +29,7 @@ class DescriptionActivity : AppCompatActivity() {
         //setContentView(R.layout.activity_description)
 
 
-        val data = intent.getSerializableExtra("program") as Program
+        val data = intent.getSerializableExtra("program") as com.surajrathod.bcaprogram.model.ProgramEntity
 
 
         favViewModel = ViewModelProvider(this@DescriptionActivity).get(FavouriteViewModel()::class.java)

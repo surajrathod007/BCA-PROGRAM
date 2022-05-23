@@ -5,15 +5,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat.startActivity
-import androidx.navigation.Navigation.findNavController
-import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.surajrathod.bcaprogram.databinding.ItemProgramBinding
-import com.surajrathod.bcaprogram.model.Program
+import com.surajrathod.bcaprogram.model.ProgramEntity
 import com.surajrathod.bcaprogram.ui.DescriptionActivity
-import java.io.Serializable
 
-class ProgramAdapter(private val list: List<Program>): RecyclerView.Adapter<ProgramAdapter.ViewHolder>() {
+class ProgramAdapter(private val list: List<ProgramEntity>): RecyclerView.Adapter<ProgramAdapter.ViewHolder>() {
     class ViewHolder(binding : ItemProgramBinding):RecyclerView.ViewHolder(binding.root){
             val index = binding.ProgramIndex
             val title = binding.programTitle

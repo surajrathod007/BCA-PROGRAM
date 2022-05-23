@@ -1,16 +1,14 @@
 package com.surajrathod.bcaprogram.viewmodel
 
-import android.app.Activity
-import android.app.Application
 import android.content.Context
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
-import com.surajrathod.bcaprogram.model.Program
+import com.surajrathod.bcaprogram.model.ProgramEntity
 import com.surajrathod.bcaprogram.room.ProgramDatabase
-import com.surajrathod.bcaprogram.room.ProgramEntity
+
 
 class FavouriteViewModel() : ViewModel() {
     private val _favProgramsList = MutableLiveData<MutableList<ProgramEntity>>(mutableListOf())
