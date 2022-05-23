@@ -25,6 +25,7 @@ class ShareFragment : Fragment() {
 
     //val update : AppUpdate = NetworkService.networkInstance.checkForUpdate()
 
+
     lateinit var btnShare : Button
     lateinit var app : Update
     lateinit var binding: FragmentShareBinding

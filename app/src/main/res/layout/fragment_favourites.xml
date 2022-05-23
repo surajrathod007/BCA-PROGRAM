@@ -12,12 +12,13 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+
+
         <androidx.appcompat.widget.Toolbar
             android:background="@color/action_bar_color"
             app:title="Favourites Programs"
             app:titleTextColor="#B3FFFFFF"
             android:elevation="10dp"
-
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize" />
 
