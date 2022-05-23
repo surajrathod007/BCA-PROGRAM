@@ -5,10 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/back_color"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.fragments.DashboardFragment">
 
     <com.google.android.material.appbar.AppBarLayout
+        android:background="@color/action_bar_color"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:animateLayoutChanges="true">
