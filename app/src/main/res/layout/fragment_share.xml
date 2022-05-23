@@ -52,6 +52,7 @@
             android:layout_height="wrap_content"/>
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/updateCardView"
             android:backgroundTint="@color/action_bar_color"
             android:layout_margin="10dp"
             android:layout_width="match_parent"

@@ -1,9 +1,104 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/back_color"
+    android:orientation="vertical"
     tools:context=".ui.DescriptionActivity">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/favToolbar"
+        android:background="@color/action_bar_color"
+        app:title="Favourites Programs"
+        app:titleTextColor="#B3FFFFFF"
+        android:elevation="10dp"
+
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:layout_marginRight="10dp"
+                android:src="@drawable/ic_baseline_favorite_border_24"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <TextView
+        android:layout_margin="10dp"
+        android:textColor="@color/text_color"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:id="@+id/txtTitle"
+        android:text="Nothing fancy here "
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_margin="10dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/txtSem"
+            android:text="Sem 1"
+            android:background="@drawable/sem_bg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"/>
+
+        <TextView
+            android:id="@+id/txtSub"
+            android:text="DBMS"
+            android:background="@drawable/sub_bg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"/>
+
+        <TextView
+            android:id="@+id/txtUnit"
+            android:text="Unit 1"
+            android:background="@drawable/unit_bg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"/>
+
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <androidx.cardview.widget.CardView
+        android:layout_margin="10dp"
+        android:backgroundTint="@color/action_bar_color"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:textIsSelectable="true"
+            android:layout_margin="5dp"
+            android:textColor="@color/white"
+            android:text="basic Simple Text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+
+    </androidx.cardview.widget.CardView>
+
+
+
+</androidx.appcompat.widget.LinearLayoutCompat>
