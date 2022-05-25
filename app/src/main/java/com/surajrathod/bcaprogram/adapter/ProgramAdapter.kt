@@ -3,18 +3,29 @@ package com.surajrathod.bcaprogram.adapter
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import androidx.core.content.ContextCompat.getDrawable
 import androidx.core.content.ContextCompat.startActivity
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
+import com.surajrathod.bcaprogram.R
 import com.surajrathod.bcaprogram.databinding.ItemProgramBinding
 import com.surajrathod.bcaprogram.model.ProgramEntity
 import com.surajrathod.bcaprogram.ui.DescriptionActivity
+import com.surajrathod.bcaprogram.viewmodel.FavouriteViewModel
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.launch
 
-class ProgramAdapter(private val list: List<ProgramEntity>): RecyclerView.Adapter<ProgramAdapter.ViewHolder>() {
+class ProgramAdapter(private val list: List<ProgramEntity>,val vm : FavouriteViewModel): RecyclerView.Adapter<ProgramAdapter.ViewHolder>() {
     class ViewHolder(binding : ItemProgramBinding):RecyclerView.ViewHolder(binding.root){
             val index = binding.ProgramIndex
             val title = binding.programTitle
             val item = binding.programCard
+            val fav = binding.isFav
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -32,10 +43,26 @@ class ProgramAdapter(private val list: List<ProgramEntity>): RecyclerView.Adapte
                 intent.putExtra("program",program)
                 startActivity(it.context,intent,Bundle())
             }
+            CoroutineScope(Dispatchers.IO).launch {
+                setIcon(fav,program.id)
+            }
+            fav.setOnClickListener{
+                CoroutineScope(Dispatchers.IO).launch{
+                    vm.toggleFavourite(program)
+                   setIcon(fav,program.id)
+                }
+            }
         }
     }
 
     override fun getItemCount(): Int {
         return list.size
+    }
+    private fun setIcon(it : ImageView, id : Int){
+        val isFav = vm.isFav(id)
+        CoroutineScope(Dispatchers.Main).launch {
+            if(isFav) it.setImageDrawable(it.resources.getDrawable(R.drawable.ic_baseline_favorite_24))
+            else it.setImageDrawable(it.resources.getDrawable(R.drawable.ic_baseline_favorite_border_24))
+        }
     }
 }

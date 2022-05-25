@@ -10,6 +10,8 @@ import com.surajrathod.bcaprogram.model.ProgramEntity
 
 import com.surajrathod.bcaprogram.viewmodel.FavouriteViewModel
 import kotlinx.android.synthetic.main.activity_description.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
@@ -68,8 +70,9 @@ class DescriptionActivity : AppCompatActivity() {
     }
 
     private fun setFavIcon(data : Int){
-        if(favViewModel.isFav(data)) binding.btnFav.setImageDrawable(resources.getDrawable(R.drawable.ic_baseline_favorite_24))
-            else binding.btnFav.setImageDrawable(resources.getDrawable(R.drawable.ic_baseline_favorite_border_24))
+        val isFav = favViewModel.isFav(data)
+       CoroutineScope(Dispatchers.Main).launch {  if(isFav) binding.btnFav.setImageDrawable(resources.getDrawable(R.drawable.ic_baseline_favorite_24))
+       else binding.btnFav.setImageDrawable(resources.getDrawable(R.drawable.ic_baseline_favorite_border_24)) }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
