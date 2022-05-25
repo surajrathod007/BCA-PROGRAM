@@ -31,6 +31,7 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginVertical="4dp"
+            android:backgroundTint="@color/black"
             android:background="?android:attr/listDivider" />
 
         <TextView
@@ -49,10 +50,12 @@
             android:layout_height="wrap_content"
             android:textSize="16sp"
             android:paddingTop="8dp"
+            android:text="What's new : \n"
             android:paddingStart="4dp"
             android:textColor="#df000000" />
 
         <RelativeLayout
+            android:layout_marginTop="16dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 

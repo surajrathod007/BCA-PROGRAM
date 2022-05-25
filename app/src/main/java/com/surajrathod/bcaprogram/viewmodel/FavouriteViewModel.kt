@@ -8,6 +8,9 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import com.surajrathod.bcaprogram.model.ProgramEntity
 import com.surajrathod.bcaprogram.room.ProgramDatabase
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 
 class FavouriteViewModel() : ViewModel() {
@@ -33,13 +36,12 @@ class FavouriteViewModel() : ViewModel() {
             favDb.programDao().removeFav(id)
             _favProgramsList.value?.remove(programEntity)
         }
-//        refresh()  // Cant be called on Background Thread
     }
     fun isFav(id : Int) = favDb.programDao().isFav(id)
 
     fun getAllPrograms(viewLifecycleOwner: LifecycleOwner){
-        clearList()
         favDb.programDao().getAllProgram().observe(viewLifecycleOwner, Observer{
+            clearList()
             _favProgramsList.value?.addAll(it)
             refresh()
         })

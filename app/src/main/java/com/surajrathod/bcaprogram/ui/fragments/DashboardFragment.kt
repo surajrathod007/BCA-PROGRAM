@@ -74,6 +74,7 @@ class DashboardFragment : Fragment() {
                             programViewModel.subjectmutableMap[position+1]!!
                         )
                         unitSpinner.setSelection(0)
+                       programViewModel.curSemester.value = semSpinner.selectedItem.toString()
                     }
                     override fun onNothingSelected(parent: AdapterView<*>?) {
                         semSpinner.adapter = spinnerAdapter.createAdapter(it,
