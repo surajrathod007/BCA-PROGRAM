@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -14,7 +14,6 @@
         app:title="Favourites Programs"
         app:titleTextColor="#B3FFFFFF"
         android:elevation="10dp"
-
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize">
 
@@ -39,6 +38,7 @@
     </androidx.appcompat.widget.Toolbar>
 
     <ScrollView
+        android:layout_marginTop="56dp"
         android:scrollbars="none"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -100,7 +100,10 @@
                 android:layout_margin="10dp"
                 android:backgroundTint="@color/action_bar_color"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                tools:ignore="WebViewLayout">
+
+
 
 
 
@@ -117,7 +120,11 @@
 
 
 
+
+
             </androidx.cardview.widget.CardView>
+
+
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -126,13 +133,4 @@
 
 
 
-
-
-
-
-
-
-
-
-
-</androidx.appcompat.widget.LinearLayoutCompat>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
