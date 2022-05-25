@@ -11,11 +11,13 @@ import androidx.appcompat.widget.LinearLayoutCompat
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.get
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.surajrathod.bcaprogram.R
 import com.surajrathod.bcaprogram.adapter.ProgramAdapter
 import com.surajrathod.bcaprogram.databinding.FragmentDashboardBinding
 import com.surajrathod.bcaprogram.utils.SpinnerAdapter
+import com.surajrathod.bcaprogram.viewmodel.FavouriteViewModel
 import com.surajrathod.bcaprogram.viewmodel.ProgramViewModel
 import kotlinx.android.synthetic.main.fragment_dashboard.*
 
@@ -32,6 +34,7 @@ private const val ARG_PARAM2 = "param2"
 class DashboardFragment : Fragment() {
 
     lateinit var programViewModel: ProgramViewModel
+    lateinit var favViewModel : FavouriteViewModel
     lateinit var binding: FragmentDashboardBinding
     lateinit var filterer : LinearLayoutCompat
     val spinnerAdapter = SpinnerAdapter()
@@ -49,12 +52,15 @@ class DashboardFragment : Fragment() {
         filterer = binding.Filterer
         binding.programRV.layoutManager = LinearLayoutManager(activity)
         programViewModel = ViewModelProvider(this).get(ProgramViewModel::class.java)
+        favViewModel = ViewModelProvider(this).get(FavouriteViewModel::class.java)
+        favViewModel.setUpDataBase(activity as Context)
+
         with(programViewModel){
            setObserver(curSemester)
             setObserver(curSubject)
             setObserver(curUnit)
             programsList.observe(viewLifecycleOwner,Observer{
-                binding.programRV.adapter = ProgramAdapter(it)
+                refresh()
                 println(it.toString())
             })
         }
@@ -137,6 +143,14 @@ class DashboardFragment : Fragment() {
                 }
             }
         }
+    }
+    fun refresh(){
+        binding.programRV.adapter =
+            programViewModel.programsList.value?.let { ProgramAdapter(it,favViewModel) }
+    }
+    override fun onResume() {
+        refresh()
+        super.onResume()
     }
     companion object {
         /**
