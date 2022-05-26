@@ -38,6 +38,23 @@ class DescriptionActivity : AppCompatActivity() {
 
 
 
+        val h = " binding.btnFav.setOnClickListener {\n" +
+                "\n" +
+                "            GlobalScope.launch {\n" +
+                "                favViewModel.toggleFavourite(\n" +
+                "                    ProgramEntity(\n" +
+                "                        data.id,\n" +
+                "                        data.title,\n" +
+                "                        data.content,\n" +
+                "                        data.sem,\n" +
+                "                        data.sub,\n" +
+                "                        data.unit\n" +
+                "                    )\n" +
+                "                )\n" +
+                "                setFavIcon(data.id,)\n" +
+                "            }\n" +
+                "        }"
+
         //webView.loadData(ans,"text/html","UTF-8")
         val s = data.content.intern()
 
