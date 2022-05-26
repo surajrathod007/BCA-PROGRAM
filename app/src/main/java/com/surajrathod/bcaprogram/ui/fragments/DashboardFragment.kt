@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.widget.AdapterView
+import android.widget.TextView
 import androidx.appcompat.widget.LinearLayoutCompat
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
@@ -79,6 +80,7 @@ class DashboardFragment : Fragment() {
                         subjectSpinner.adapter = spinnerAdapter.createAdapter(it,
                             programViewModel.subjectmutableMap[position+1]!!
                         )
+
                         unitSpinner.setSelection(0)
                        programViewModel.curSemester.value = semSpinner.selectedItem.toString()
                     }
