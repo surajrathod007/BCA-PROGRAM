@@ -8,6 +8,13 @@ import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.widget.Toast
 import androidx.core.view.isVisible
+import androidx.datastore.core.DataStore
+import androidx.datastore.core.DataStoreFactory
+import androidx.datastore.preferences.core.PreferenceDataStoreFactory
+import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.core.booleanPreferencesKey
+import androidx.datastore.preferences.core.edit
+import androidx.datastore.preferences.preferencesDataStore
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.getkeepsafe.taptargetview.TapTarget
@@ -25,6 +32,8 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_dashboard.*
 import kotlinx.android.synthetic.main.update_dialog_layout.*
 import kotlinx.android.synthetic.main.welcome_screen.*
+import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.first
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -32,11 +41,23 @@ import retrofit2.Response
 class MainActivity : AppCompatActivity() {
     var thisVersion = BuildConfig.VERSION_NAME.toFloat()
     val tapTargetBuilder = TapTargetMaker()
+    val preferenceDataStore : DataStore<Preferences> by preferencesDataStore("tutorial")
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-//        println("CUR VERION IS $thisVersion")
-        bottomNavigationView.visibility = GONE
+        // App Tutorial for new Users  --------------------------------------------------------------------------------------
+        CoroutineScope(Dispatchers.IO).launch {
+            val preferences = preferenceDataStore.data.first()
+            val isTutorialDone = preferences[booleanPreferencesKey("isTutorialDone")]
+            if(isTutorialDone != true){
+                setUpTutorial()
+                preferenceDataStore.edit {
+                    it[booleanPreferencesKey("isTutorialDone")] = true
+                }
+            }
+        }
+        // App Updates Setup    ---------------------------------------------------------------------------------------------
        var intent = Intent(this,MainActivity::class.java)
        val checkUpdates = NetworkService.networkInstance.checkForUpdates()
         checkUpdates.enqueue(object : Callback<AppUpdate> {
@@ -62,15 +83,30 @@ class MainActivity : AppCompatActivity() {
         laterBtn.setOnClickListener{
             toggleUpdateDialog()
         }
+        // Bottom Navigation ----------------------------------------------------------------------------------------------------
         bottomNavigationView.setupWithNavController(findNavController(R.id.fragmentContainerView))
-       getStartedBtn.setOnClickListener {
-           val tutorial = createTapTargetSequence()!!
-           tutorial.start()
-           bottomNavigationView.visibility = VISIBLE
-           welcomeScreen.visibility = GONE
-       }
 
+    }
+    // Class Functions ----------------------------------------------------------------------------------------------------------
+    private fun setUpTutorial(){
+        bottomNavigationView.visibility = GONE
+        welcomeScreen.visibility = VISIBLE
 
+        getStartedBtn.setOnClickListener {
+            val tutorial = createTapTargetSequence()!!
+            tutorial.start()
+            bottomNavigationView.visibility = VISIBLE
+            welcomeScreen.visibility = GONE
+        }
+        skipBtn.setOnClickListener {
+            bottomNavigationView.visibility = VISIBLE
+            welcomeScreen.visibility = GONE
+            GlobalScope.launch {
+                preferenceDataStore.edit {
+                    it[booleanPreferencesKey("isTutorialDone")] = true
+                }
+            }
+        }
     }
 
     private fun setUpLink(link: String) : Intent {
@@ -91,13 +127,14 @@ class MainActivity : AppCompatActivity() {
 
     private fun createTapTargetSequence(): TapTargetSequence? {
         return TapTargetSequence(this).targets(
-            tapTargetBuilder.createTapTarget(findViewById(R.id.dashboardFragment), "Home "),
-            tapTargetBuilder.createTapTarget(searchButton,"Search"),
-            tapTargetBuilder.createTapTarget(findViewById(R.id.ttFavBtn),"addToFav"),
-            tapTargetBuilder.createTapTarget(findViewById(R.id.favouritesFragment),"favourites"),
-            tapTargetBuilder.createTapTarget(findViewById(R.id.shareFragment),"share"),
+            tapTargetBuilder.createTapTarget(findViewById(R.id.dashboardFragment), "Home ","Here You will Get All Programs for Your BCA Journey"),
+            tapTargetBuilder.createTapTarget(searchButton,"Search","Find Programs for your different Semesters and Subjects"),
+            tapTargetBuilder.createTapTarget(findViewById(R.id.ttFavBtn),"Make It Favourite","Mark Programs with ❤ to Find Them Quickly"),
+            tapTargetBuilder.createTapTarget(findViewById(R.id.favouritesFragment),"Favourites","Your ❤ Programs will Appear here Offline for You "),
+            tapTargetBuilder.createTapTarget(findViewById(R.id.shareFragment),"Sharing Is Caring", "Share this App with Your \nBCA mates , Happy Coding !"),
         ).listener(object : TapTargetSequence.Listener{
             override fun onSequenceFinish() {
+
             }
             override fun onSequenceStep(lastTarget: TapTarget?, targetClicked: Boolean) {}
             override fun onSequenceCanceled(lastTarget: TapTarget?) {}

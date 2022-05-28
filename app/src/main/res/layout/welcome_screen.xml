@@ -19,6 +19,40 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:text="Take App Tour"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/getStartedBtn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.964" />
+
+    <TextView
+        android:id="@+id/skipBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:text="Skip >"
+        android:paddingTop="16dp"
+        android:paddingStart="16dp"
+        android:paddingBottom="16dp"
+        android:textColor="@color/sem_color"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.950"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.990" />
+
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/getStartedBtn"
         android:layout_width="wrap_content"
@@ -28,7 +62,7 @@
         android:background="@drawable/dialog_background"
         android:backgroundTint="@color/unit_color"
         android:textColor="@color/white"
-        android:text="Get Started"
+        android:text="@string/get_started"
         android:textAllCaps="false"
         android:fontFamily="sans-serif-medium"
         android:textSize="18sp"

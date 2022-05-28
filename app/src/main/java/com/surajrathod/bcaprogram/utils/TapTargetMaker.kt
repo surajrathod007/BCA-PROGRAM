@@ -1,5 +1,6 @@
 package com.surajrathod.bcaprogram.utils
 
+import android.graphics.Typeface
 import android.view.View
 import com.getkeepsafe.taptargetview.TapTarget
 import com.surajrathod.bcaprogram.R
@@ -11,6 +12,7 @@ class TapTargetMaker {
             .outerCircleColor(color)
             .transparentTarget(true)
             .descriptionTextColor(R.color.white)
+            .descriptionTypeface(Typeface.SANS_SERIF)
             .outerCircleAlpha(0.8f)
     }
 }
