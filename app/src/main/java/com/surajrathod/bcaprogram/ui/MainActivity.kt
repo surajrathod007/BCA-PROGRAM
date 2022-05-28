@@ -7,11 +7,9 @@ import android.os.Bundle
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.widget.Toast
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.isVisible
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
-
 import com.surajrathod.bcaprogram.BuildConfig
 import com.surajrathod.bcaprogram.R
 import com.surajrathod.bcaprogram.databinding.ActivityMainBinding
@@ -23,22 +21,28 @@ import kotlinx.android.synthetic.main.update_dialog_layout.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-
+val Context.preferenceDataStore : DataStore<Preferences> by preferencesDataStore("tutorial")
 class MainActivity : AppCompatActivity() {
-    var thisVersion = com.surajrathod.bcaprogram.BuildConfig.VERSION_NAME.toFloat()
+    var thisVersion = BuildConfig.VERSION_NAME.toFloat()
+    val tapTargetBuilder = TapTargetMaker()
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-//        println("CUR VERION IS $thisVersion")
+        // App Tutorial for new Users  --------------------------------------------------------------------------------------
+        CoroutineScope(Dispatchers.IO).launch {
+            val preferences = preferenceDataStore.data.first()
+            val isTutorialDone = preferences[booleanPreferencesKey("isTutorialDone")]
+            if(isTutorialDone != true){
+                setUpTutorial()
+                preferenceDataStore.edit {
+                    it[booleanPreferencesKey("isTutorialDone")] = true
+                }
+            }
+        }
+        // App Updates Setup    ---------------------------------------------------------------------------------------------
        var intent = Intent(this,MainActivity::class.java)
-
-
-
-
-
-
-
-
        val checkUpdates = NetworkService.networkInstance.checkForUpdates()
         checkUpdates.enqueue(object : Callback<AppUpdate> {
             override fun onResponse(call: Call<AppUpdate>, response: Response<AppUpdate>) {
@@ -63,7 +67,30 @@ class MainActivity : AppCompatActivity() {
         laterBtn.setOnClickListener{
             toggleUpdateDialog()
         }
+        // Bottom Navigation ----------------------------------------------------------------------------------------------------
         bottomNavigationView.setupWithNavController(findNavController(R.id.fragmentContainerView))
+
+    }
+    // Class Functions ----------------------------------------------------------------------------------------------------------
+    private fun setUpTutorial(){
+        bottomNavigationView.visibility = GONE
+        welcomeScreen.visibility = VISIBLE
+
+        getStartedBtn.setOnClickListener {
+            val tutorial = createTapTargetSequence()!!
+            tutorial.start()
+            bottomNavigationView.visibility = VISIBLE
+            welcomeScreen.visibility = GONE
+        }
+        skipBtn.setOnClickListener {
+            bottomNavigationView.visibility = VISIBLE
+            welcomeScreen.visibility = GONE
+            GlobalScope.launch {
+                preferenceDataStore.edit {
+                    it[booleanPreferencesKey("isTutorialDone")] = true
+                }
+            }
+        }
     }
 
     private fun setUpLink(link: String) : Intent {
@@ -80,6 +107,22 @@ class MainActivity : AppCompatActivity() {
             updateDialog.visibility = VISIBLE
             bottomNavigationView.visibility = GONE
         }
+    }
+
+    private fun createTapTargetSequence(): TapTargetSequence? {
+        return TapTargetSequence(this).targets(
+            tapTargetBuilder.createTapTarget(findViewById(R.id.dashboardFragment), "Home ","Here You will Get All Programs for Your BCA Journey"),
+            tapTargetBuilder.createTapTarget(searchButton,"Search","Find Programs for your different Semesters and Subjects"),
+            tapTargetBuilder.createTapTarget(findViewById(R.id.ttFavBtn),"Make It Favourite","Mark Programs with ❤ to Find Them Quickly"),
+            tapTargetBuilder.createTapTarget(findViewById(R.id.favouritesFragment),"Favourites","Your ❤ Programs will Appear here Offline for You "),
+            tapTargetBuilder.createTapTarget(findViewById(R.id.shareFragment),"Sharing Is Caring", "Share this App with Your \nBCA mates , Happy Coding !"),
+        ).listener(object : TapTargetSequence.Listener{
+            override fun onSequenceFinish() {
+
+            }
+            override fun onSequenceStep(lastTarget: TapTarget?, targetClicked: Boolean) {}
+            override fun onSequenceCanceled(lastTarget: TapTarget?) {}
+        }).continueOnCancel(true)
     }
 
 }
