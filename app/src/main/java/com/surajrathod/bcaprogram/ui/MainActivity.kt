@@ -1,5 +1,6 @@
 package com.surajrathod.bcaprogram.ui
 
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
@@ -37,11 +38,11 @@ import kotlinx.coroutines.flow.first
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-
+val Context.preferenceDataStore : DataStore<Preferences> by preferencesDataStore("tutorial")
 class MainActivity : AppCompatActivity() {
     var thisVersion = BuildConfig.VERSION_NAME.toFloat()
     val tapTargetBuilder = TapTargetMaker()
-    val preferenceDataStore : DataStore<Preferences> by preferencesDataStore("tutorial")
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

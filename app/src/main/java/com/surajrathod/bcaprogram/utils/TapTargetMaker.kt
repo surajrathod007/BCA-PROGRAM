@@ -13,6 +13,6 @@ class TapTargetMaker {
             .transparentTarget(true)
             .descriptionTextColor(R.color.white)
             .descriptionTypeface(Typeface.SANS_SERIF)
-            .outerCircleAlpha(0.8f)
+            .outerCircleAlpha(0.9f)
     }
 }
