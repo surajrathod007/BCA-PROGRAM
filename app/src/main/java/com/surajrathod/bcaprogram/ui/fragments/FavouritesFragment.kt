@@ -41,14 +41,8 @@ class FavouritesFragment : Fragment() {
         favModel.getAllPrograms(viewLifecycleOwner)
 
         favModel.favProgramsList.observe(viewLifecycleOwner, Observer {
-            binding.rvFav.adapter = ProgramAdapter(it)
+            binding.rvFav.adapter = ProgramAdapter(it,favModel, this)
         })
-
-
-
-
-
-
 
         return view
     }
