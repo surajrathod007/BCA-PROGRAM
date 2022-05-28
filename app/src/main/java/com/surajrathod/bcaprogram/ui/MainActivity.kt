@@ -11,7 +11,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.isVisible
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
-import androidx.viewbinding.BuildConfig
+
 import com.surajrathod.bcaprogram.BuildConfig
 import com.surajrathod.bcaprogram.R
 import com.surajrathod.bcaprogram.databinding.ActivityMainBinding
@@ -25,7 +25,7 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class MainActivity : AppCompatActivity() {
-    var thisVersion = BuildConfig.VERSION_NAME.toFloat()
+    var thisVersion = com.surajrathod.bcaprogram.BuildConfig.VERSION_NAME.toFloat()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
