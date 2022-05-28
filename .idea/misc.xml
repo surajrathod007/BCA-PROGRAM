@@ -8,7 +8,7 @@
         <entry key="..\:/Users/AAA/AndroidStudioProjects/BCA-PROGRAM/app/src/main/res/drawable/sub_bg.xml" value="0.1895" />
         <entry key="..\:/Users/AAA/AndroidStudioProjects/BCA-PROGRAM/app/src/main/res/drawable/unit_bg.xml" value="0.214" />
         <entry key="..\:/Users/AAA/AndroidStudioProjects/BCA-PROGRAM/app/src/main/res/layout/activity_description.xml" value="0.25" />
-        <entry key="..\:/Users/AAA/AndroidStudioProjects/BCA-PROGRAM/app/src/main/res/layout/activity_main.xml" value="0.2630208333333333" />
+        <entry key="..\:/Users/AAA/AndroidStudioProjects/BCA-PROGRAM/app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="..\:/Users/AAA/AndroidStudioProjects/BCA-PROGRAM/app/src/main/res/layout/fragment_dashboard.xml" value="0.25" />
         <entry key="..\:/Users/AAA/AndroidStudioProjects/BCA-PROGRAM/app/src/main/res/layout/fragment_favourites.xml" value="0.2337962962962963" />
         <entry key="..\:/Users/AAA/AndroidStudioProjects/BCA-PROGRAM/app/src/main/res/layout/fragment_share.xml" value="0.22819701762313602" />
@@ -16,6 +16,7 @@
         <entry key="..\:/Users/AAA/AndroidStudioProjects/BCA-PROGRAM/app/src/main/res/layout/loading_screen.xml" value="0.2630208333333333" />
         <entry key="..\:/Users/AAA/AndroidStudioProjects/BCA-PROGRAM/app/src/main/res/layout/update_dialog.xml" value="0.25" />
         <entry key="..\:/Users/AAA/AndroidStudioProjects/BCA-PROGRAM/app/src/main/res/layout/update_dialog_layout.xml" value="0.2630208333333333" />
+        <entry key="..\:/Users/AAA/AndroidStudioProjects/BCA-PROGRAM/app/src/main/res/layout/welcome_screen.xml" value="0.25" />
         <entry key="..\:/Users/AAA/AndroidStudioProjects/BCA-PROGRAM/app/src/main/res/menu/bottom_menu.xml" value="0.2630208333333333" />
         <entry key="..\:/Users/AAA/AndroidStudioProjects/BCA-PROGRAM/app/src/main/res/menu/toolbar_menu.xml" value="0.25" />
         <entry key="..\:/Users/Asus/AndroidStudioProjects/BCAProgram/app/src/main/res/layout/activity_main.xml" value="0.25416666666666665" />

@@ -20,6 +20,18 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"/>
 
+    <View
+        android:id="@+id/ttFavBtn"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.098"
+        android:visibility="invisible"/>
+
     <fragment
         android:id="@+id/fragmentContainerView"
         android:name="androidx.navigation.fragment.NavHostFragment"
@@ -36,6 +48,10 @@
         android:id="@+id/updateDialog"
         layout="@layout/update_dialog_layout"
         android:visibility="gone"
+        />
+    <include
+        android:id="@+id/welcomeScreen"
+        layout="@layout/welcome_screen"
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
