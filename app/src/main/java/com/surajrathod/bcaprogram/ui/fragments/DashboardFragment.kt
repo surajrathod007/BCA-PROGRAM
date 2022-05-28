@@ -60,6 +60,7 @@ class DashboardFragment : Fragment() {
             })
         }
 
+
         with(binding){
             activity?.let {
                 semSpinner.adapter = spinnerAdapter.createAdapter(it, programViewModel.semList)
@@ -91,6 +92,9 @@ class DashboardFragment : Fragment() {
         binding.searchButton.setOnClickListener{
             enableSearch()
         }
+
+
+
 
         return view
     }

@@ -39,6 +39,7 @@ android {
     }
 }
 
+
 dependencies {
 
     implementation 'androidx.core:core-ktx:1.7.0'
@@ -105,6 +106,8 @@ dependencies {
 
     //   implementation 'com.github.softwee:codeview-android:1.0.3'
 
+    //tap target
+    implementation 'com.getkeepsafe.taptargetview:taptargetview:1.13.0'
 
 
 }

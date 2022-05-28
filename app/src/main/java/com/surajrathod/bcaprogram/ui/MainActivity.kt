@@ -7,9 +7,11 @@ import android.os.Bundle
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.isVisible
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
+import androidx.viewbinding.BuildConfig
 import com.surajrathod.bcaprogram.BuildConfig
 import com.surajrathod.bcaprogram.R
 import com.surajrathod.bcaprogram.databinding.ActivityMainBinding
@@ -29,6 +31,11 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 //        println("CUR VERION IS $thisVersion")
        var intent = Intent(this,MainActivity::class.java)
+
+
+
+
+
        val checkUpdates = NetworkService.networkInstance.checkForUpdates()
         checkUpdates.enqueue(object : Callback<AppUpdate> {
             override fun onResponse(call: Call<AppUpdate>, response: Response<AppUpdate>) {
