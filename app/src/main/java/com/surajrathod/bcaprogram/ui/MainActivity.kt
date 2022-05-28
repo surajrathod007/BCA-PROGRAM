@@ -38,6 +38,7 @@ class MainActivity : AppCompatActivity() {
 
 
 
+
        val checkUpdates = NetworkService.networkInstance.checkForUpdates()
         checkUpdates.enqueue(object : Callback<AppUpdate> {
             override fun onResponse(call: Call<AppUpdate>, response: Response<AppUpdate>) {

@@ -96,27 +96,50 @@
 
             </androidx.appcompat.widget.LinearLayoutCompat>
 
+
+
+
             <androidx.cardview.widget.CardView
                 android:layout_margin="10dp"
                 android:backgroundTint="@color/action_bar_color"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                tools:ignore="WebViewLayout">
+                >
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
 
 
+                    <com.mukesh.MarkdownView
+                        android:backgroundTintMode="add"
+                        android:backgroundTint="@color/back_color"
+                        android:layout_margin="10dp"
+                        android:id="@+id/marDown"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+
+                    <TextView
+                        android:id="@+id/btnShareProgram"
+                        android:tooltipText="Copy Program And Paste "
+                        android:drawableRight="@drawable/ic_baseline_share_24"
+                        android:padding="10dp"
+                        android:textStyle="bold"
+                        android:drawableTint="@color/white"
+                        android:layout_margin="10dp"
+                        android:clickable="true"
+                        android:background="@drawable/button_bg"
+                        android:textColor="@color/white"
+                        android:text="Share Program With Your Friends ;)"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
 
 
 
-
-                <TextView
-                    android:id="@+id/txtProgram"
-                    android:textIsSelectable="true"
-                    android:layout_margin="5dp"
-                    android:textColor="@color/white"
-                    android:text="basic Simple Text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
 
 
 
@@ -125,12 +148,11 @@
             </androidx.cardview.widget.CardView>
 
 
-
         </androidx.appcompat.widget.LinearLayoutCompat>
 
+
+
+
     </ScrollView>
-
-
-
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
