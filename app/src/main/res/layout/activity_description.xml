@@ -114,6 +114,8 @@
 
 
                     <com.mukesh.MarkdownView
+
+                        android:background="@color/action_bar_color"
                         android:backgroundTintMode="add"
                         android:backgroundTint="@color/back_color"
                         android:layout_margin="10dp"

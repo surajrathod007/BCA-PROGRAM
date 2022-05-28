@@ -1,5 +1,6 @@
 package com.surajrathod.bcaprogram.ui
 
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.view.MenuItem
@@ -11,13 +12,19 @@ import androidx.lifecycle.ViewModelProvider
 
 import com.surajrathod.bcaprogram.R
 import com.surajrathod.bcaprogram.databinding.ActivityDescriptionBinding
+import com.surajrathod.bcaprogram.model.AppUpdate
 import com.surajrathod.bcaprogram.model.ProgramEntity
+import com.surajrathod.bcaprogram.network.NetworkService
+import com.surajrathod.bcaprogram.ui.fragments.ShareFragment
 import com.surajrathod.bcaprogram.viewmodel.FavouriteViewModel
 import kotlinx.android.synthetic.main.activity_description.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import java.net.URL
 import java.util.regex.Pattern
 
@@ -31,6 +38,7 @@ class DescriptionActivity : AppCompatActivity() {
 
     lateinit var binding: ActivityDescriptionBinding
 
+    lateinit var app : Update
 
 
 
@@ -38,6 +46,7 @@ class DescriptionActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        loadUpdate()
         val data = intent.getSerializableExtra("program") as com.surajrathod.bcaprogram.model.ProgramEntity
 
         binding = ActivityDescriptionBinding.inflate(layoutInflater)
@@ -76,6 +85,7 @@ class DescriptionActivity : AppCompatActivity() {
 
 
 
+
         val gk = data.content.intern()
 
 
@@ -87,7 +97,10 @@ class DescriptionActivity : AppCompatActivity() {
 
 
 
+
+
         binding.marDown.setMarkDownText(data.content)
+
 
 
         favViewModel = ViewModelProvider(this@DescriptionActivity).get(FavouriteViewModel()::class.java)
@@ -95,6 +108,17 @@ class DescriptionActivity : AppCompatActivity() {
        GlobalScope.launch {  setFavIcon(data.id) }
         //favViewModel.favDb.programDao().isFav(data.id).toString()
 
+        binding.btnShareProgram.setOnClickListener {
+
+
+
+            val intent = Intent()
+            intent.action = Intent.ACTION_SEND
+            intent.type = "text/plain"
+            intent.putExtra(Intent.EXTRA_TEXT,data.content + "\nHey i found an app where you can get all BCA Practical programs for free!! \n Download Now : ${app.link}")
+            startActivity(Intent.createChooser(intent,"Share With Friends"))
+
+        }
 
 
         binding.btnFav.setOnClickListener {
@@ -206,4 +230,34 @@ class DescriptionActivity : AppCompatActivity() {
         }
         return super.onOptionsItemSelected(item)
     }
+
+
+    fun loadUpdate(){
+        NetworkService.networkInstance.checkForUpdates().enqueue(object : Callback<AppUpdate?> {
+            override fun onResponse(call: Call<AppUpdate?>, response: Response<AppUpdate?>) {
+
+                var body = response.body()
+                val u = Update(body!!.id, body.version, body.link, body.message)
+
+                setUpdate(u)
+
+            }
+
+            override fun onFailure(call: Call<AppUpdate?>, t: Throwable) {
+                TODO("Not yet implemented")
+            }
+        })
+    }
+
+    private fun setUpdate(u: Update) {
+
+        app = u
+    }
+
+    data class Update(
+        var id : Int,
+        var version : Float,
+        var link : String,
+        var message : String = ""
+    )
 }
