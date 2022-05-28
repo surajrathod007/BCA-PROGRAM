@@ -3,7 +3,9 @@ package com.surajrathod.bcaprogram.ui
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
+import androidx.core.net.toUri
 import androidx.lifecycle.ViewModelProvider
+
 import com.surajrathod.bcaprogram.R
 import com.surajrathod.bcaprogram.databinding.ActivityDescriptionBinding
 import com.surajrathod.bcaprogram.model.ProgramEntity
@@ -22,6 +24,7 @@ class DescriptionActivity : AppCompatActivity() {
     lateinit var binding: ActivityDescriptionBinding
 
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -33,11 +36,37 @@ class DescriptionActivity : AppCompatActivity() {
 
         val data = intent.getSerializableExtra("program") as com.surajrathod.bcaprogram.model.ProgramEntity
 
+        val gk = data.content.intern()
+
+
+
+        val h = " binding.btnFav.setOnClickListener {\n" +
+                "\n" +
+                "            GlobalScope.launch {\n" +
+                "                favViewModel.toggleFavourite(\n" +
+                "                    ProgramEntity(\n" +
+                "                        data.id,\n" +
+                "                        data.title,\n" +
+                "                        data.content,\n" +
+                "                        data.sem,\n" +
+                "                        data.sub,\n" +
+                "                        data.unit\n" +
+                "                    )\n" +
+                "                )\n" +
+                "                setFavIcon(data.id,)\n" +
+                "            }\n" +
+                "        }"
+
+        //webView.loadData(ans,"text/html","UTF-8")
+        val s = data.content.intern()
+
 
         favViewModel = ViewModelProvider(this@DescriptionActivity).get(FavouriteViewModel()::class.java)
         favViewModel.setUpDataBase(this)
        GlobalScope.launch {  setFavIcon(data.id) }
         //favViewModel.favDb.programDao().isFav(data.id).toString()
+
+
 
         binding.btnFav.setOnClickListener {
 
@@ -60,8 +89,9 @@ class DescriptionActivity : AppCompatActivity() {
         txtSem.text = data.sem.toString()
         txtSub.text = data.sub.toString()
         txtUnit.text = data.unit.toString()
-        txtProgram.text = data.content.toString()
+        txtProgram.text = gk
 
+       // txtProgram.text = g
         println(data.toString())
 
         setSupportActionBar(favToolbar)

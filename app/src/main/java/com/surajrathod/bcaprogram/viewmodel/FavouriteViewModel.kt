@@ -11,6 +11,7 @@ import com.surajrathod.bcaprogram.room.ProgramDatabase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.util.*
 
 
 class FavouriteViewModel() : ViewModel() {
@@ -18,6 +19,7 @@ class FavouriteViewModel() : ViewModel() {
     val favProgramsList : LiveData<MutableList<ProgramEntity>>
         get() = _favProgramsList
     private lateinit var favDb : ProgramDatabase
+    val recycleBin = Stack<ProgramEntity>()
 
     private fun clearList() = _favProgramsList.value?.clear()
     private fun refresh(){
@@ -35,7 +37,13 @@ class FavouriteViewModel() : ViewModel() {
         }else{
             favDb.programDao().removeFav(id)
             _favProgramsList.value?.remove(programEntity)
+            recycleBin.push(programEntity)
         }
+    }
+    suspend fun undoDelete(){
+        val programEntity = recycleBin.pop()
+        favDb.programDao().insert(programEntity)
+        _favProgramsList.value?.add(programEntity)
     }
     fun isFav(id : Int) = favDb.programDao().isFav(id)
 
