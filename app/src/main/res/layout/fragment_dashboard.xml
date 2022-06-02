@@ -5,12 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/back_color"
+    android:background="@color/back_color_new"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.fragments.DashboardFragment">
 
     <com.google.android.material.appbar.AppBarLayout
-        android:background="@color/action_bar_color"
+        android:background="@color/action_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:animateLayoutChanges="true">
@@ -50,11 +50,13 @@
             android:id="@+id/Filterer"
             android:layout_width="match_parent"
             android:layout_height="46dp"
-            android:background="@color/action_bar_color"
+            android:background="@color/action_bar"
             android:visibility="gone"
+            android:paddingBottom="5dp"
             android:weightSum="3">
 
             <androidx.appcompat.widget.AppCompatSpinner
+
 
                 android:layout_marginLeft="5dp"
                 android:background="@drawable/spinner_view1"

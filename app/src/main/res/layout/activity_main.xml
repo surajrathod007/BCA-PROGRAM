@@ -8,11 +8,11 @@
     android:background="@color/action_bar_color">
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
-
+        style="@style/Animation.Design.BottomSheetDialog"
         app:itemIconTint="@drawable/bottom_nav_color"
         app:itemTextColor="@drawable/bottom_nav_color"
         app:itemRippleColor="@color/text_color"
-        android:background="@color/action_bar_color"
+        android:background="@color/action_bar"
         android:id="@+id/bottomNavigationView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

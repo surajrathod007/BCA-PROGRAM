@@ -5,8 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    app:cardBackgroundColor="@color/action_bar_color"
+    app:cardBackgroundColor="@color/white"
     android:padding="12dp"
+    app:cardElevation="0dp"
     android:layout_marginHorizontal="8dp"
     android:layout_marginTop="12dp"
     xmlns:app="http://schemas.android.com/apk/res-auto">
@@ -21,7 +22,8 @@
             android:layout_height="match_parent"
             android:background="@color/unit_color"/>
     <TextView
-        android:textColor="@color/text_color"
+        android:textColor="@color/text_color_bold"
+        android:fontFamily="@font/main_bold"
         android:id="@+id/ProgramIndex"
         android:layout_width="36dp"
         android:layout_height="match_parent"
@@ -30,8 +32,9 @@
         android:gravity="center" />
 
     <TextView
+        android:fontFamily="@font/main_semibold"
         android:layout_weight="7"
-        android:textColor="@color/text_color"
+        android:textColor="@color/text_color_bold"
         android:id="@+id/programTitle"
         android:layout_width="256dp"
         android:layout_height="match_parent"

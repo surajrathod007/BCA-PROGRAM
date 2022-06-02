@@ -4,13 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/back_color"
+    android:background="@color/back_color_new"
     android:orientation="vertical"
     tools:context=".ui.DescriptionActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/favToolbar"
-        android:background="@color/action_bar_color"
+        android:background="@color/action_bar"
         app:title="Favourites Programs"
         app:titleTextColor="#B3FFFFFF"
         android:elevation="10dp"
@@ -24,6 +24,7 @@
             android:layout_height="match_parent">
 
             <ImageView
+                android:tint="@color/white"
                 android:id="@+id/btnFav"
                 android:layout_marginRight="10dp"
                 android:src="@drawable/ic_baseline_favorite_border_24"
@@ -49,8 +50,9 @@
             android:layout_height="match_parent">
 
             <TextView
+                android:fontFamily="@font/main_bold"
                 android:layout_margin="10dp"
-                android:textColor="@color/text_color"
+                android:textColor="@color/text_color_bold"
                 android:textSize="30sp"
                 android:textStyle="bold"
                 android:id="@+id/txtTitle"
@@ -65,6 +67,8 @@
                 android:layout_height="wrap_content">
 
                 <TextView
+                    android:textColor="@color/text_color_bold"
+                    android:fontFamily="@font/main_bold"
                     android:id="@+id/txtSem"
                     android:text="Sem 1"
                     android:background="@drawable/sem_bg"
@@ -75,6 +79,8 @@
                     android:paddingRight="5dp"/>
 
                 <TextView
+                    android:fontFamily="@font/main_bold"
+                    android:textColor="@color/text_color_bold"
                     android:id="@+id/txtSub"
                     android:text="DBMS"
                     android:background="@drawable/sub_bg"
@@ -85,6 +91,8 @@
                     android:paddingRight="5dp"/>
 
                 <TextView
+                    android:fontFamily="@font/main_bold"
+                    android:textColor="@color/text_color_bold"
                     android:id="@+id/txtUnit"
                     android:text="Unit 1"
                     android:background="@drawable/unit_bg"
@@ -101,9 +109,11 @@
 
             <androidx.cardview.widget.CardView
                 android:layout_margin="10dp"
-                android:backgroundTint="@color/action_bar_color"
+                android:backgroundTint="@color/white"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                app:cardElevation="0dp"
+                app:cardCornerRadius="10dp"
                 >
 
                 <androidx.appcompat.widget.LinearLayoutCompat
@@ -124,6 +134,8 @@
                         android:layout_height="wrap_content"/>
 
                     <TextView
+
+                        android:fontFamily="@font/main_bold"
                         android:id="@+id/btnShareProgram"
                         android:tooltipText="Copy Program And Paste "
                         android:drawableRight="@drawable/ic_baseline_share_24"

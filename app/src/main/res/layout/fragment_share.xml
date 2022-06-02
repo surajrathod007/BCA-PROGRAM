@@ -3,27 +3,28 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:backgroundTint="@color/back_color"
+    android:backgroundTint="@color/back_color_new"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.fragments.ShareFragment">
 
     <androidx.appcompat.widget.LinearLayoutCompat
-        android:background="@color/back_color"
+        android:background="@color/back_color_new"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <androidx.appcompat.widget.Toolbar
-            android:background="@color/action_bar_color"
+            android:background="@color/action_bar"
             app:title="Share Our App"
-            app:titleTextColor="#B3FFFFFF"
+            app:titleTextColor="@color/white"
             android:elevation="10dp"
 
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize" />
 
         <TextView
-            android:textColor="@color/text_color"
+            android:fontFamily="@font/main_heavy"
+            android:textColor="@color/text_color_bold"
             android:layout_margin="10dp"
             android:text="Share Our App With Your Friends!"
             android:layout_gravity="center_horizontal"
@@ -35,31 +36,37 @@
             android:layout_height="wrap_content"/>
 
         <Button
+            android:fontFamily="@font/main_bold"
             android:layout_margin="10dp"
             android:id="@+id/btnShare"
             android:text="Click Here To Share"
-            android:backgroundTint="@color/button_color"
+            android:backgroundTint="@color/source_icon"
             android:textAllCaps="false"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
         <TextView
-            android:textColor="@color/text_color"
+            android:fontFamily="@font/main_bold"
+            android:textColor="@color/text_color_bold"
             android:text="Change Log :"
+            android:textStyle="bold"
             android:textSize="20sp"
             android:textAlignment="center"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
         <androidx.cardview.widget.CardView
+            app:cardElevation="0dp"
+            app:cardCornerRadius="5dp"
             android:id="@+id/updateCardView"
-            android:backgroundTint="@color/action_bar_color"
+            android:backgroundTint="@color/white"
             android:layout_margin="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <TextView
 
-                android:textColor="@color/text_color"
+                android:textColor="@color/text_color_bold"
+                android:fontFamily="@font/main_bold"
                 android:layout_margin="5dp"
                 android:text="Update Message"
                 android:id="@+id/txtMessage"

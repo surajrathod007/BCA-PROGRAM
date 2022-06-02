@@ -19,4 +19,22 @@
     <color name="sem_color">#4485fd</color>
     <color name="sub_color">#fe7853</color>
     <color name="unit_color">#02cc6a</color>
+
+
+    <color name="back_color_new">#f0f4fd</color>
+    <color name="dodger_blue">#1d96ff</color>
+    <color name="text_color_bold">#3e416e</color>
+    <color name="air_force_blue">#8895c1</color>
+    <color name="light_text">#afb2be</color>
+    <color name="action_bar">#3e416e</color>
+    <color name="mustard">#fedd50</color>
+    <color name="mustard_light">#ffbe0a</color>
+    <color name="levender">#d9e8fb</color>
+
+    <color name="youtube_button">#ffe1e1</color>
+    <color name="youtube_icon">#eb2d2d</color>
+    <color name="source_button">#d0ffdb</color>
+    <color name="source_icon">#62d76c</color>
+
+    <color name="spinner_bg">#575992</color>
 </resources>
