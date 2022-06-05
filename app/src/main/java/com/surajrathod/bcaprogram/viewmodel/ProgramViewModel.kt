@@ -34,9 +34,10 @@ class ProgramViewModel : ViewModel() {
     fun getRemotePrograms(sem : String, sub : String, unit : String){
 
         val response = NetworkService.networkInstance.fetchPrograms(sem, sub, unit)
-//        println("Response is $response")
+        println("Response is $response")
         response.enqueue(object : Callback<List<ProgramEntity>>{
             override fun onResponse(call: Call<List<ProgramEntity>>, response: Response<List<ProgramEntity>>) {
+                println("Inner Response is $response")
                 response.body()?.let {
                     clearPrograms()
                     _programsList.value?.addAll(it)

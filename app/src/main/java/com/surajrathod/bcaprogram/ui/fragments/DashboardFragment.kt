@@ -152,7 +152,7 @@ class DashboardFragment : Fragment() {
     }
     fun refresh(){
         binding.programRV.adapter =
-            programViewModel.programsList.value?.let { ProgramAdapter(it,favViewModel,this) }
+            programViewModel.programsList.value?.let { it -> ProgramAdapter(it.sortedBy { it.id },favViewModel,this) }
     }
     override fun onResume() {
         refresh()
