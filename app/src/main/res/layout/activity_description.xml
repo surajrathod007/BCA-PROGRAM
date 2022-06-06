@@ -50,10 +50,10 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:fontFamily="@font/main_bold"
+                android:fontFamily="@font/main_regular"
                 android:layout_margin="10dp"
                 android:textColor="@color/text_color_bold"
-                android:textSize="30sp"
+                android:textSize="16sp"
                 android:textStyle="bold"
                 android:id="@+id/txtTitle"
                 android:text="Nothing fancy here "
@@ -67,10 +67,11 @@
                 android:layout_height="wrap_content">
 
                 <TextView
-                    android:textColor="@color/text_color_bold"
+                    android:textColor="@color/sem_color"
                     android:fontFamily="@font/main_bold"
                     android:id="@+id/txtSem"
                     android:text="Sem 1"
+
                     android:background="@drawable/sem_bg"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -80,7 +81,7 @@
 
                 <TextView
                     android:fontFamily="@font/main_bold"
-                    android:textColor="@color/text_color_bold"
+                    android:textColor="@color/sub_color"
                     android:id="@+id/txtSub"
                     android:text="DBMS"
                     android:background="@drawable/sub_bg"
@@ -91,8 +92,9 @@
                     android:paddingRight="5dp"/>
 
                 <TextView
+                    android:clickable="true"
                     android:fontFamily="@font/main_bold"
-                    android:textColor="@color/text_color_bold"
+                    android:textColor="@color/unit_color"
                     android:id="@+id/txtUnit"
                     android:text="Unit 1"
                     android:background="@drawable/unit_bg"
@@ -105,6 +107,15 @@
             </androidx.appcompat.widget.LinearLayoutCompat>
 
 
+            <TextView
+                android:textColor="#BAED1118"
+                android:fontFamily="@font/main_semibold"
+                android:gravity="right"
+                android:layout_marginRight="10dp"
+                android:id="@+id/reportProgram"
+                android:text="Report Program"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
 
 
             <androidx.cardview.widget.CardView
@@ -147,6 +158,16 @@
                         android:background="@drawable/button_bg"
                         android:textColor="@color/white"
                         android:text="Share Program With Your Friends ;)"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnCopyCode"
+                        style="@style/Widget.Material3.Button.OutlinedButton"
+                        android:text="Click Here To Copy Code"
+                        android:layout_margin="10dp"
+                        android:textSize="15sp"
+                        android:fontFamily="@font/main_semibold"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"/>
 

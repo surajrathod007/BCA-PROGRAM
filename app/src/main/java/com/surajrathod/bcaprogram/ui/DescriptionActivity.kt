@@ -1,9 +1,14 @@
 package com.surajrathod.bcaprogram.ui
 
+import android.content.ClipData
+import android.content.ClipboardManager
+import android.content.Context
 import android.content.Intent
 import android.graphics.Color
+import android.net.Uri
 import android.os.Bundle
 import android.view.MenuItem
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 
 import androidx.compose.ui.Modifier
@@ -51,66 +56,31 @@ class DescriptionActivity : AppCompatActivity() {
 
         binding = ActivityDescriptionBinding.inflate(layoutInflater)
 
-
-
         setContentView(binding.root)
         //setContentView(R.layout.activity_description)
 
 
-        val pish = "<html>\n" +
-                "<head>\n" +
-                "\n" +
-                "<style>\n" +
-                "\n" +
-                "body{\n" +
-                "font-family: 'Open Sans', sans-serif;\n" +
-                "color : #202d5a;\n" +
-                "}\n" +
-                "\n" +
-                "</style>\n" +
-                "<link rel=\"preconnect\" href=\"https://fonts.googleapis.com\">\n" +
-                "<link rel=\"preconnect\" href=\"https://fonts.gstatic.com\" crossorigin>\n" +
-                "<link href=\"https://fonts.googleapis.com/css2?family=Open+Sans&display=swap\" rel=\"stylesheet\">\n" +
-                "\n" +
-                "</head>\n" +
-                "<body>"
-
-        val pas = "</body>"
-
-
-
-
-
-
-
-
-
-
-        val gk = data.content.intern()
-
-
-
-
-        val s = data.content.intern()
-
-
-
-
-
+        binding.btnCopyCode.setOnClickListener {
+            copyTextToClipboard(data.content)
+        }
 
 
         binding.marDown.setMarkDownText(data.content)
-
-
 
         favViewModel = ViewModelProvider(this@DescriptionActivity).get(FavouriteViewModel()::class.java)
         favViewModel.setUpDataBase(this)
        GlobalScope.launch {  setFavIcon(data.id) }
         //favViewModel.favDb.programDao().isFav(data.id).toString()
 
+
+        binding.reportProgram.setOnClickListener {
+            val send = "bcazone007@gmail.com"
+            val subject = "Report Program ${data.id}"
+            val message = "Hello, BCA Hub team , I Found an Error On Program Number ${data.id}"
+
+            sendReport(send,subject,message)
+        }
         binding.btnShareProgram.setOnClickListener {
-
-
 
             val intent = Intent()
             intent.action = Intent.ACTION_SEND
@@ -252,6 +222,30 @@ class DescriptionActivity : AppCompatActivity() {
     private fun setUpdate(u: Update) {
 
         app = u
+    }
+
+    private fun copyTextToClipboard(textToCopy : String) {
+
+        val clipboardManager = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+        val clipData = ClipData.newPlainText("code", textToCopy)
+        clipboardManager.setPrimaryClip(clipData)
+        Toast.makeText(this@DescriptionActivity, "Code copied to clipboard", Toast.LENGTH_LONG).show()
+    }
+
+    fun sendReport(recipient : String,subject : String,message: String)
+    {
+        val mIntent = Intent(Intent.ACTION_SEND)
+        mIntent.data = Uri.parse("mailto:")
+        mIntent.type = "text/plain"
+        mIntent.putExtra(Intent.EXTRA_EMAIL, arrayOf(recipient))
+        mIntent.putExtra(Intent.EXTRA_SUBJECT,subject)
+        mIntent.putExtra(Intent.EXTRA_TEXT,message)
+
+        try{
+            startActivity(Intent.createChooser(mIntent,"Choose Gmail To Send Report..."))
+        }catch (e : Exception){
+
+        }
     }
 
     data class Update(
