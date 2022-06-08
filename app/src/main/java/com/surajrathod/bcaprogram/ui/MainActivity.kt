@@ -21,11 +21,9 @@ import com.getkeepsafe.taptargetview.TapTarget
 import com.getkeepsafe.taptargetview.TapTargetSequence
 import com.surajrathod.bcaprogram.BuildConfig
 import com.surajrathod.bcaprogram.R
-import com.surajrathod.bcaprogram.databinding.ActivityMainBinding
-import com.surajrathod.bcaprogram.databinding.UpdateDialogLayoutBinding
 import com.surajrathod.bcaprogram.model.AppUpdate
 import com.surajrathod.bcaprogram.network.NetworkService
-import com.surajrathod.bcaprogram.utils.Constants
+import com.surajrathod.bcaprogram.utils.DataStoreConstants
 import com.surajrathod.bcaprogram.utils.TapTargetMaker
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_dashboard.*
@@ -39,7 +37,7 @@ import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-val Context.preferenceDataStore : DataStore<Preferences> by preferencesDataStore("tutorial")
+val Context.preferenceDataStore : DataStore<Preferences> by preferencesDataStore(DataStoreConstants.DATA_STORE_NAME)
 var shareLink : String? = null
 class MainActivity : AppCompatActivity() {
     var thisVersion = BuildConfig.VERSION_NAME.toFloat()
@@ -52,8 +50,8 @@ class MainActivity : AppCompatActivity() {
         // App Tutorial for new Users  --------------------------------------------------------------------------------------
         CoroutineScope(Dispatchers.IO).launch {
             val preferences = preferenceDataStore.data.first()
-            val isTutorialDone = preferences[booleanPreferencesKey(Constants.DS_KEY_IS_TUTORIAL_DONE)]
-            shareLink = preferences[stringPreferencesKey(Constants.DS_KEY_APP_SHARING_LINK)]
+            val isTutorialDone = preferences[booleanPreferencesKey(DataStoreConstants.DS_KEY_IS_TUTORIAL_DONE)]
+            shareLink = preferences[stringPreferencesKey(DataStoreConstants.DS_KEY_APP_SHARING_LINK)]
             println("UPDATE LINK : $shareLink")
             if(isTutorialDone != true){
                 setUpTutorial()
@@ -74,7 +72,7 @@ class MainActivity : AppCompatActivity() {
                     msg.text = msg.text.toString() + data.message
                     GlobalScope.launch {
                         preferenceDataStore.edit {
-                            it[stringPreferencesKey(Constants.DS_KEY_APP_SHARING_LINK)] = data.link
+                            it[stringPreferencesKey(DataStoreConstants.DS_KEY_APP_SHARING_LINK)] = data.link
                         }
                     }
                     intent = setUpLink(data.link)
@@ -83,7 +81,7 @@ class MainActivity : AppCompatActivity() {
                 if(shareLink==null){
                     GlobalScope.launch {
                         preferenceDataStore.edit {
-                            it[stringPreferencesKey(Constants.DS_KEY_APP_SHARING_LINK)] = data.link
+                            it[stringPreferencesKey(DataStoreConstants.DS_KEY_APP_SHARING_LINK)] = data.link
                         }
                     }
                     shareLink = data.link
@@ -121,7 +119,7 @@ class MainActivity : AppCompatActivity() {
             welcomeScreen.visibility = GONE
             GlobalScope.launch {
                 preferenceDataStore.edit {
-                    it[booleanPreferencesKey(Constants.DS_KEY_IS_TUTORIAL_DONE)] = true
+                    it[booleanPreferencesKey(DataStoreConstants.DS_KEY_IS_TUTORIAL_DONE)] = true
                 }
             }
         }
