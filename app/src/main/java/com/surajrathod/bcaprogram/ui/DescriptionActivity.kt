@@ -85,7 +85,7 @@ class DescriptionActivity : AppCompatActivity() {
             val intent = Intent()
             intent.action = Intent.ACTION_SEND
             intent.type = "text/plain"
-            intent.putExtra(Intent.EXTRA_TEXT,data.content + "\nHey i found an app where you can get all BCA Practical programs for free!! \n Download Now : ${app.link}")
+            intent.putExtra(Intent.EXTRA_TEXT,data.content + "\nHey i found an app where you can get all BCA Practical programs for free!! \n Download Now : $shareLink")
             startActivity(Intent.createChooser(intent,"Share With Friends"))
 
         }
@@ -208,13 +208,11 @@ class DescriptionActivity : AppCompatActivity() {
 
                 var body = response.body()
                 val u = Update(body!!.id, body.version, body.link, body.message)
-
                 setUpdate(u)
-
             }
 
             override fun onFailure(call: Call<AppUpdate?>, t: Throwable) {
-                TODO("Not yet implemented")
+                println("RETROFIT ERROR WHILE CHECKING UPDATES IN DESCRIPTION ACTIVITY: $t")
             }
         })
     }

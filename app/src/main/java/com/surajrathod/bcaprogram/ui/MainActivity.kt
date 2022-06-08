@@ -13,6 +13,7 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
+import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
@@ -24,6 +25,7 @@ import com.surajrathod.bcaprogram.databinding.ActivityMainBinding
 import com.surajrathod.bcaprogram.databinding.UpdateDialogLayoutBinding
 import com.surajrathod.bcaprogram.model.AppUpdate
 import com.surajrathod.bcaprogram.network.NetworkService
+import com.surajrathod.bcaprogram.utils.Constants
 import com.surajrathod.bcaprogram.utils.TapTargetMaker
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_dashboard.*
@@ -38,6 +40,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 val Context.preferenceDataStore : DataStore<Preferences> by preferencesDataStore("tutorial")
+var shareLink : String? = null
 class MainActivity : AppCompatActivity() {
     var thisVersion = BuildConfig.VERSION_NAME.toFloat()
     val tapTargetBuilder = TapTargetMaker()
@@ -49,7 +52,9 @@ class MainActivity : AppCompatActivity() {
         // App Tutorial for new Users  --------------------------------------------------------------------------------------
         CoroutineScope(Dispatchers.IO).launch {
             val preferences = preferenceDataStore.data.first()
-            val isTutorialDone = preferences[booleanPreferencesKey("isTutorialDone")]
+            val isTutorialDone = preferences[booleanPreferencesKey(Constants.DS_KEY_IS_TUTORIAL_DONE)]
+            shareLink = preferences[stringPreferencesKey(Constants.DS_KEY_APP_SHARING_LINK)]
+            println("UPDATE LINK : $shareLink")
             if(isTutorialDone != true){
                 setUpTutorial()
                 preferenceDataStore.edit {
@@ -67,8 +72,21 @@ class MainActivity : AppCompatActivity() {
                 if(data.version>thisVersion){
                     println("Update available")
                     msg.text = msg.text.toString() + data.message
+                    GlobalScope.launch {
+                        preferenceDataStore.edit {
+                            it[stringPreferencesKey(Constants.DS_KEY_APP_SHARING_LINK)] = data.link
+                        }
+                    }
                     intent = setUpLink(data.link)
                         toggleUpdateDialog()
+                }
+                if(shareLink==null){
+                    GlobalScope.launch {
+                        preferenceDataStore.edit {
+                            it[stringPreferencesKey(Constants.DS_KEY_APP_SHARING_LINK)] = data.link
+                        }
+                    }
+                    shareLink = data.link
                 }
             }
             override fun onFailure(call: Call<AppUpdate>, t: Throwable) {
@@ -103,7 +121,7 @@ class MainActivity : AppCompatActivity() {
             welcomeScreen.visibility = GONE
             GlobalScope.launch {
                 preferenceDataStore.edit {
-                    it[booleanPreferencesKey("isTutorialDone")] = true
+                    it[booleanPreferencesKey(Constants.DS_KEY_IS_TUTORIAL_DONE)] = true
                 }
             }
         }
