@@ -18,6 +18,7 @@ import com.surajrathod.bcaprogram.databinding.FragmentShareBinding
 import com.surajrathod.bcaprogram.model.AppUpdate
 import com.surajrathod.bcaprogram.network.NetworkService
 import com.surajrathod.bcaprogram.ui.DescriptionActivity
+import com.surajrathod.bcaprogram.ui.MainActivity
 import kotlinx.android.synthetic.main.fragment_share.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -32,6 +33,7 @@ class ShareFragment : Fragment() {
     lateinit var btnShare : Button
     lateinit var app : Update
     lateinit var binding: FragmentShareBinding
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -57,6 +59,7 @@ class ShareFragment : Fragment() {
             appLink = " "
         }
 
+        binding.txtVersion.text = "app version : ${MainActivity().thisVersion}"
 
         btnShare = view.findViewById(R.id.btnShare)
 
@@ -105,7 +108,7 @@ class ShareFragment : Fragment() {
                 if(body == null){
                     Toast.makeText(requireContext(),"failed", Toast.LENGTH_LONG).show()
                 }else{
-                    Toast.makeText(requireContext(),"Success ${body.message}", Toast.LENGTH_LONG).show()
+                    //Toast.makeText(requireContext(),"Success ${body.message}", Toast.LENGTH_LONG).show()
                 }
 
                 txtMessage.text = body?.message.toString()
