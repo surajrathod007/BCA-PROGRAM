@@ -2,6 +2,7 @@ package com.surajrathod.bcaprogram.ui.fragments
 
 import android.content.Context
 import android.os.Bundle
+import android.os.Handler
 import android.view.*
 import androidx.fragment.app.Fragment
 import android.view.View.GONE
@@ -9,6 +10,7 @@ import android.view.View.VISIBLE
 import android.widget.AdapterView
 import android.widget.TextView
 import androidx.appcompat.widget.LinearLayoutCompat
+import androidx.core.view.isVisible
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -21,6 +23,7 @@ import com.surajrathod.bcaprogram.utils.SpinnerAdapter
 import com.surajrathod.bcaprogram.viewmodel.FavouriteViewModel
 import com.surajrathod.bcaprogram.viewmodel.ProgramViewModel
 import kotlinx.android.synthetic.main.fragment_dashboard.*
+import kotlinx.android.synthetic.main.fragment_dashboard.view.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -115,9 +118,13 @@ class DashboardFragment : Fragment() {
         else filterer.visibility = VISIBLE
     }
     private fun retrivePrograms(){
+        toggleLoadingScreen()
         with(programViewModel){
             getRemotePrograms(curSemester.value!!,curSubject.value!!,curUnit.value!!)
         }
+        Handler().postDelayed({
+            toggleLoadingScreen()
+        },500)
     }
     private fun setOnSpinnerItemSelected(){
         with(binding){
@@ -153,6 +160,10 @@ class DashboardFragment : Fragment() {
     fun refresh(){
         binding.programRV.adapter =
             programViewModel.programsList.value?.let { it -> ProgramAdapter(it.sortedBy { it.id },favViewModel,this) }
+    }
+    fun toggleLoadingScreen(){
+        if(binding.progressLayout.root.visibility == VISIBLE) binding.progressLayout.root.visibility = GONE
+        else binding.progressLayout.root.visibility = VISIBLE
     }
     override fun onResume() {
         refresh()
