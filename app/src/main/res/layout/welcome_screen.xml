@@ -5,16 +5,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/action_bar_color"
+    android:background="@color/action_bar"
+    android:padding="10dp"
     >
 
     <TextView
+        android:fontFamily="@font/main_heavy"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Welcome\nto\nBCA Programs"
         android:gravity="center_horizontal"
         android:textSize="24sp"
-        android:textColor="@color/white"
+        android:textColor="@color/text_color"
         app:layout_constraintBottom_toTopOf="@+id/getStartedBtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -26,7 +28,7 @@
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
         android:text="Take App Tour"
-        android:textColor="@color/white"
+        android:textColor="@color/text_color"
         android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/getStartedBtn"
         app:layout_constraintEnd_toEndOf="parent"
@@ -44,7 +46,8 @@
         android:paddingTop="16dp"
         android:paddingStart="16dp"
         android:paddingBottom="16dp"
-        android:textColor="@color/sem_color"
+        android:fontFamily="@font/main_semibold"
+        android:textColor="@color/text_color"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -54,8 +57,9 @@
         app:layout_constraintVertical_bias="0.990" />
 
     <androidx.appcompat.widget.AppCompatButton
+
         android:id="@+id/getStartedBtn"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="532dp"
         android:paddingHorizontal="16dp"
@@ -66,6 +70,7 @@
         android:textAllCaps="false"
         android:fontFamily="sans-serif-medium"
         android:textSize="18sp"
+        android:drawableRight="@drawable/ic_baseline_arrow_forward_ios_24"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
