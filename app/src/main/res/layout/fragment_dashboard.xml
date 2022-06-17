@@ -99,4 +99,14 @@
         android:layout_width="match_parent"
         android:visibility="gone"/>
 
+    <include
+        android:id="@+id/offlineScreen"
+        layout="@layout/offline_screen"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:visibility="gone"
+        />
+
+
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

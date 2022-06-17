@@ -9,16 +9,20 @@ import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.widget.AdapterView
 import android.widget.TextView
+import androidx.appcompat.widget.AppCompatButton
 import androidx.appcompat.widget.LinearLayoutCompat
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.isVisible
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.get
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
 import com.surajrathod.bcaprogram.R
 import com.surajrathod.bcaprogram.adapter.ProgramAdapter
 import com.surajrathod.bcaprogram.databinding.FragmentDashboardBinding
+import com.surajrathod.bcaprogram.network.NetworkService
 import com.surajrathod.bcaprogram.utils.SpinnerAdapter
 import com.surajrathod.bcaprogram.viewmodel.FavouriteViewModel
 import com.surajrathod.bcaprogram.viewmodel.ProgramViewModel
@@ -42,6 +46,7 @@ class DashboardFragment : Fragment() {
     lateinit var binding: FragmentDashboardBinding
     lateinit var filterer : LinearLayoutCompat
     val spinnerAdapter = SpinnerAdapter()
+    lateinit var offlinePage : ConstraintLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,11 +58,13 @@ class DashboardFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_dashboard, container, false)
         binding = FragmentDashboardBinding.bind(view)
+        offlinePage = binding.offlineScreen.root
         filterer = binding.Filterer
         binding.programRV.layoutManager = LinearLayoutManager(activity)
         programViewModel = ViewModelProvider(this).get(ProgramViewModel::class.java)
         favViewModel = ViewModelProvider(this).get(FavouriteViewModel::class.java)
         favViewModel.setUpDataBase(activity as Context)
+
 
         with(programViewModel){
            setObserver(curSemester)
@@ -65,7 +72,6 @@ class DashboardFragment : Fragment() {
             setObserver(curUnit)
             programsList.observe(viewLifecycleOwner,Observer{
                 refresh()
-                println(it.toString())
             })
         }
 
@@ -118,13 +124,31 @@ class DashboardFragment : Fragment() {
         else filterer.visibility = VISIBLE
     }
     private fun retrivePrograms(){
-        toggleLoadingScreen()
-        with(programViewModel){
-            getRemotePrograms(curSemester.value!!,curSubject.value!!,curUnit.value!!)
+        if(NetworkService.checkForInternet(activity as Context)){
+            if(offlinePage.isVisible){
+                offlinePage.visibility = GONE
+            }
+                toggleLoadingScreen()
+                with(programViewModel) {
+                    getRemotePrograms(curSemester.value!!, curSubject.value!!, curUnit.value!!)
+                }
+                Handler().postDelayed({
+                    toggleLoadingScreen()
+                }, 500)
+        }else{
+               if(offlinePage.isVisible){
+
+               }else{
+                   offlinePage.visibility = VISIBLE
+                   Glide.with(this).load(resources.getDrawable(R.drawable.vector_offline_screen))
+                       .circleCrop()
+                       .into(offlinePage.findViewById(R.id.ivVector))
+                   offlinePage.findViewById<AppCompatButton>(R.id.btnRetry).setOnClickListener {
+                       retrivePrograms()
+                   }
+               }
         }
-        Handler().postDelayed({
-            toggleLoadingScreen()
-        },500)
+
     }
     private fun setOnSpinnerItemSelected(){
         with(binding){

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/back_color_new">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.649">
+        <!--
+add this on our app page if you want to give credit
+<a href="https://www.freepik.com/vectors/alphabet-letters">Alphabet letters vector created by freepik - www.freepik.com</a> -->
+
+        <ImageView
+            android:id="@+id/ivVector"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:padding="0dp"
+            android:cropToPadding="true"
+            android:layout_gravity="center"
+            android:layout_marginBottom="80dp" />
+
+        <TextView
+            android:id="@+id/tvOfflineMsg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:paddingHorizontal="32dp"
+            android:layout_marginTop="64dp"
+            android:fontFamily="@font/main_heavy_it"
+            android:text="You are Offline"
+            android:textSize="24sp" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnRetry"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="128dp"
+            android:background="@drawable/button_background_gradient"
+            android:fontFamily="sans-serif-medium"
+            android:paddingHorizontal="56dp"
+            android:paddingVertical="2dp"
+            android:text="@string/retry"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+
+    </FrameLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
