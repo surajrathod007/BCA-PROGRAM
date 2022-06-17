@@ -1,6 +1,7 @@
 package com.surajrathod.bcaprogram.ui.fragments
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.view.*
@@ -47,6 +48,7 @@ class DashboardFragment : Fragment() {
     lateinit var filterer : LinearLayoutCompat
     val spinnerAdapter = SpinnerAdapter()
     lateinit var offlinePage : ConstraintLayout
+    var hide = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -71,7 +73,14 @@ class DashboardFragment : Fragment() {
             setObserver(curSubject)
             setObserver(curUnit)
             programsList.observe(viewLifecycleOwner,Observer{
-                refresh()
+                if(it.isEmpty() && hide){
+
+                   binding.noProgramsScreen.root.visibility = VISIBLE
+
+                } else {
+                    hide = true
+                    refresh()
+                }
             })
         }
 
@@ -183,7 +192,9 @@ class DashboardFragment : Fragment() {
     }
     fun refresh(){
         binding.programRV.adapter =
-            programViewModel.programsList.value?.let { it -> ProgramAdapter(it.sortedBy { it.id },favViewModel,this) }
+            programViewModel.programsList.value?.let { it -> ProgramAdapter(it.sortedBy { it.id },favViewModel,this)
+            }
+        binding.noProgramsScreen.root.visibility = GONE
     }
     fun toggleLoadingScreen(){
         if(binding.progressLayout.root.visibility == VISIBLE) binding.progressLayout.root.visibility = GONE

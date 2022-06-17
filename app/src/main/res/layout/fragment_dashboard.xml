@@ -107,6 +107,14 @@
         android:visibility="gone"
         />
 
+    <include
+        android:id="@+id/noProgramsScreen"
+        layout="@layout/no_programs_screen"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:visibility="gone"
+        />
+
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
