@@ -27,6 +27,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import me.everything.android.ui.overscroll.OverScrollDecoratorHelper
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -64,6 +65,7 @@ class DescriptionActivity : AppCompatActivity() {
             copyTextToClipboard(data.content)
         }
 
+        OverScrollDecoratorHelper.setUpOverScroll(binding.scrollDescription)
 
         binding.marDown.setMarkDownText(data.content)
 

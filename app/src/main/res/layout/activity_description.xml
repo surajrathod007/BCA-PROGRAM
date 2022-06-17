@@ -39,6 +39,7 @@
     </androidx.appcompat.widget.Toolbar>
 
     <ScrollView
+        android:id="@+id/scrollDescription"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="56dp"
@@ -134,10 +135,10 @@
 
                     <com.mukesh.MarkdownView
 
+                        android:layout_marginTop="10dp"
                         android:id="@+id/marDown"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_margin="10dp"
                         android:background="@color/action_bar_color"
                         android:backgroundTint="@color/back_color"
                         android:backgroundTintMode="add" />

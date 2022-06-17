@@ -29,6 +29,8 @@ import com.surajrathod.bcaprogram.viewmodel.FavouriteViewModel
 import com.surajrathod.bcaprogram.viewmodel.ProgramViewModel
 import kotlinx.android.synthetic.main.fragment_dashboard.*
 import kotlinx.android.synthetic.main.fragment_dashboard.view.*
+import me.everything.android.ui.overscroll.OverScrollDecoratorHelper
+import me.everything.android.ui.overscroll.OverScrollDecoratorHelper.ORIENTATION_VERTICAL
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -63,6 +65,8 @@ class DashboardFragment : Fragment() {
         offlinePage = binding.offlineScreen.root
         filterer = binding.Filterer
         binding.programRV.layoutManager = LinearLayoutManager(activity)
+
+        OverScrollDecoratorHelper.setUpOverScroll(binding.programRV,ORIENTATION_VERTICAL)
         programViewModel = ViewModelProvider(this).get(ProgramViewModel::class.java)
         favViewModel = ViewModelProvider(this).get(FavouriteViewModel::class.java)
         favViewModel.setUpDataBase(activity as Context)

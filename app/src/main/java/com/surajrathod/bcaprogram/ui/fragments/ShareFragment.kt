@@ -59,6 +59,8 @@ class ShareFragment : Fragment() {
             appLink = " "
         }
 
+
+
         binding.txtVersion.text = "app version : ${MainActivity().thisVersion}"
 
         btnShare = view.findViewById(R.id.btnShare)

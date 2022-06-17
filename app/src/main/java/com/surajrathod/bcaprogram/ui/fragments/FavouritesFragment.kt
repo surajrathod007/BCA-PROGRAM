@@ -13,6 +13,8 @@ import com.surajrathod.bcaprogram.R
 import com.surajrathod.bcaprogram.adapter.ProgramAdapter
 import com.surajrathod.bcaprogram.databinding.FragmentFavouritesBinding
 import com.surajrathod.bcaprogram.viewmodel.FavouriteViewModel
+import me.everything.android.ui.overscroll.OverScrollDecoratorHelper
+import me.everything.android.ui.overscroll.OverScrollDecoratorHelper.ORIENTATION_VERTICAL
 
 
 class FavouritesFragment : Fragment() {
@@ -38,6 +40,7 @@ class FavouritesFragment : Fragment() {
         favModel.setUpDataBase(requireContext())
 
         binding.rvFav.layoutManager = LinearLayoutManager(activity)
+        OverScrollDecoratorHelper.setUpOverScroll(binding.rvFav,ORIENTATION_VERTICAL)
         toggleLoadingScreen()
         favModel.getAllPrograms(viewLifecycleOwner)
         Handler().postDelayed({
