@@ -8,11 +8,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.surajrathod.bcaprogram.R
 import com.surajrathod.bcaprogram.adapter.ProgramAdapter
 import com.surajrathod.bcaprogram.databinding.FragmentFavouritesBinding
 import com.surajrathod.bcaprogram.viewmodel.FavouriteViewModel
+import kotlinx.android.synthetic.main.activity_main.*
 import me.everything.android.ui.overscroll.OverScrollDecoratorHelper
 import me.everything.android.ui.overscroll.OverScrollDecoratorHelper.ORIENTATION_VERTICAL
 
@@ -33,7 +36,7 @@ class FavouritesFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_favourites, container, false)
-
+        var hide = false
         binding = FragmentFavouritesBinding.bind(view)
 
         favModel = ViewModelProvider(this).get(FavouriteViewModel::class.java)
@@ -47,7 +50,20 @@ class FavouritesFragment : Fragment() {
             toggleLoadingScreen()
         },250)
         favModel.favProgramsList.observe(viewLifecycleOwner, Observer {
-            binding.rvFav.adapter = ProgramAdapter(it,favModel, this)
+
+            if(it.isEmpty() && hide){
+
+                binding.noFavoriteScreen.root.visibility = View.VISIBLE
+                binding.noFavoriteScreen.btnToDashboard.setOnClickListener {
+                    activity?.onBackPressed()
+                }
+
+            } else {
+                hide = true
+                binding.rvFav.adapter = ProgramAdapter(it,favModel, this)
+                binding.noFavoriteScreen.root.visibility = View.GONE
+            }
+
         })
 
         return view

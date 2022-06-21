@@ -43,6 +43,10 @@
             android:layout_width="match_parent"
             android:visibility="gone"/>
 
+        <include layout="@layout/no_favourites_screen"
+                android:id="@+id/noFavoriteScreen"
+                android:visibility="gone"/>
+
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 </FrameLayout>
