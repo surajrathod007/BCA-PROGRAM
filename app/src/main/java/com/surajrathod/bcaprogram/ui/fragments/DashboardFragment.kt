@@ -47,10 +47,10 @@ class DashboardFragment : Fragment() {
     lateinit var programViewModel: ProgramViewModel
     lateinit var favViewModel : FavouriteViewModel
     lateinit var binding: FragmentDashboardBinding
-    lateinit var filterer : LinearLayoutCompat
+//    lateinit var filterer : LinearLayoutCompat
     val spinnerAdapter = SpinnerAdapter()
     lateinit var offlinePage : ConstraintLayout
-    var hide = false
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,10 +60,11 @@ class DashboardFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        var hide = false
         val view = inflater.inflate(R.layout.fragment_dashboard, container, false)
         binding = FragmentDashboardBinding.bind(view)
         offlinePage = binding.offlineScreen.root
-        filterer = binding.Filterer
+//        filterer = binding.Filterer
         binding.programRV.layoutManager = LinearLayoutManager(activity)
 
         OverScrollDecoratorHelper.setUpOverScroll(binding.programRV,ORIENTATION_VERTICAL)
@@ -100,11 +101,16 @@ class DashboardFragment : Fragment() {
                         position: Int,
                         id: Long
                     ) {
+                        toggleLoadingScreen()
+                        Handler().postDelayed({
+                            toggleLoadingScreen()
+                        }, 500)
                         subjectSpinner.adapter = spinnerAdapter.createAdapter(it,
                             programViewModel.subjectmutableMap[position+1]!!
                         )
 
                         unitSpinner.setSelection(0)
+                        hide = false
                        programViewModel.curSemester.value = semSpinner.selectedItem.toString()
                     }
                     override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -117,9 +123,9 @@ class DashboardFragment : Fragment() {
         }
 
         setOnSpinnerItemSelected()
-        binding.searchButton.setOnClickListener{
+       /* binding.searchButton.setOnClickListener{
             enableSearch()
-        }
+        }*/
 
 
 
@@ -132,10 +138,10 @@ class DashboardFragment : Fragment() {
             retrivePrograms()
         })
     }
-    private fun enableSearch(){
+   /* private fun enableSearch(){
         if(filterer.visibility==VISIBLE) filterer.visibility = GONE
         else filterer.visibility = VISIBLE
-    }
+    }*/
     private fun retrivePrograms(){
         if(NetworkService.checkForInternet(activity as Context)){
             if(offlinePage.isVisible){
@@ -204,10 +210,7 @@ class DashboardFragment : Fragment() {
         if(binding.progressLayout.root.visibility == VISIBLE) binding.progressLayout.root.visibility = GONE
         else binding.progressLayout.root.visibility = VISIBLE
     }
-    override fun onResume() {
-        refresh()
-        super.onResume()
-    }
+
     companion object {
         /**
          * Use this factory method to create a new instance of

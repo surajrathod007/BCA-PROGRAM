@@ -39,7 +39,6 @@
                    android:layout_height="56dp"
                    android:layout_alignParentEnd="true"
                    android:padding="16dp"
-                   android:src="@drawable/ic_action_search"
                    app:tint="@color/design_default_color_on_primary" />
            </RelativeLayout>
 
