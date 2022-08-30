@@ -72,6 +72,13 @@ class DashboardFragment : Fragment() {
         favViewModel = ViewModelProvider(this).get(FavouriteViewModel::class.java)
         favViewModel.setUpDataBase(activity as Context)
 
+        programViewModel.isloading.observe(viewLifecycleOwner,{
+            if(!it){
+                binding.loadingAnimation.root.visibility = GONE
+            }else{
+                binding.loadingAnimation.root.visibility = VISIBLE
+            }
+        })
 
         with(programViewModel){
            setObserver(curSemester)

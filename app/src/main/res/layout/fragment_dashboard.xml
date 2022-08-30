@@ -9,6 +9,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.fragments.DashboardFragment">
 
+
     <com.google.android.material.appbar.AppBarLayout
         android:background="@color/action_bar"
         android:layout_width="match_parent"
@@ -91,6 +92,8 @@
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
         />
 
+
+
     <include
         android:id="@+id/progressLayout"
         layout="@layout/loading_screen"
@@ -113,6 +116,15 @@
         android:layout_width="match_parent"
         android:visibility="gone"
         />
+
+    <include
+        android:id="@+id/loadingAnimation"
+        layout="@layout/loading_view"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:visibility="visible"
+        />
+
 
 
 

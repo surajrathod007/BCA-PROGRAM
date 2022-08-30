@@ -21,6 +21,10 @@ class ProgramViewModel : ViewModel() {
     val unitList = arrayOf("Unit 1","Unit 2","Unit 3","Unit 4")
     val subjectmutableMap = mutableMapOf<Int,Array<String>>()
 
+    var _loading = MutableLiveData<Boolean>(true)
+    val isloading : LiveData<Boolean>
+    get() = _loading
+
     init {
         createSubjectsMutableMap()
     }
@@ -33,6 +37,9 @@ class ProgramViewModel : ViewModel() {
 
     fun getRemotePrograms(sem : String, sub : String, unit : String){
 
+        _loading.postValue(true)
+
+
         val response = NetworkService.networkInstance.fetchPrograms(sem, sub, unit)
         println("Response is $response")
         response.enqueue(object : Callback<List<ProgramEntity>>{
@@ -41,6 +48,7 @@ class ProgramViewModel : ViewModel() {
                 response.body()?.let {
                     clearPrograms()
                     _programsList.value?.addAll(it)
+                    _loading.postValue(false)
                     refresh()
 //                    println("Body is $it")
                 }
@@ -49,6 +57,7 @@ class ProgramViewModel : ViewModel() {
             override fun onFailure(call: Call<List<ProgramEntity>>, t: Throwable) {
                 clearPrograms()
                 refresh()
+                _loading.postValue(false)
                 println("Failure is $t")
             }
         })
