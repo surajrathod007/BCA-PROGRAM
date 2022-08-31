@@ -6,6 +6,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     app:cardBackgroundColor="@color/white"
+    android:foreground="?attr/selectableItemBackground"
     android:padding="12dp"
     app:cardElevation="0dp"
     android:layout_marginHorizontal="8dp"

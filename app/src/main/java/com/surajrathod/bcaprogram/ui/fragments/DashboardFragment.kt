@@ -8,6 +8,7 @@ import android.view.*
 import androidx.fragment.app.Fragment
 import android.view.View.GONE
 import android.view.View.VISIBLE
+import android.view.animation.OvershootInterpolator
 import android.widget.AdapterView
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatButton
@@ -27,6 +28,7 @@ import com.surajrathod.bcaprogram.network.NetworkService
 import com.surajrathod.bcaprogram.utils.SpinnerAdapter
 import com.surajrathod.bcaprogram.viewmodel.FavouriteViewModel
 import com.surajrathod.bcaprogram.viewmodel.ProgramViewModel
+import jp.wasabeef.recyclerview.animators.SlideInUpAnimator
 import kotlinx.android.synthetic.main.fragment_dashboard.*
 import kotlinx.android.synthetic.main.fragment_dashboard.view.*
 import me.everything.android.ui.overscroll.OverScrollDecoratorHelper
@@ -68,6 +70,7 @@ class DashboardFragment : Fragment() {
         binding.programRV.layoutManager = LinearLayoutManager(activity)
 
         OverScrollDecoratorHelper.setUpOverScroll(binding.programRV,ORIENTATION_VERTICAL)
+        //binding.programRV.itemAnimator = SlideInUpAnimator(OvershootInterpolator(2f))
         programViewModel = ViewModelProvider(this).get(ProgramViewModel::class.java)
         favViewModel = ViewModelProvider(this).get(FavouriteViewModel::class.java)
         favViewModel.setUpDataBase(activity as Context)
