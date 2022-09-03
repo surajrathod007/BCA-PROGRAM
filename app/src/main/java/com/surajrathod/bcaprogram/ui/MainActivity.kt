@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View.GONE
 import android.view.View.VISIBLE
+import android.widget.TableLayout
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.datastore.core.DataStore
@@ -17,12 +18,18 @@ import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
+import androidx.viewpager2.widget.ViewPager2
 import com.getkeepsafe.taptargetview.TapTarget
 import com.getkeepsafe.taptargetview.TapTargetSequence
+import com.google.android.material.tabs.TabLayoutMediator
 import com.surajrathod.bcaprogram.BuildConfig
+import com.surajrathod.bcaprogram.MainViewPagerAdapter
 import com.surajrathod.bcaprogram.R
 import com.surajrathod.bcaprogram.model.AppUpdate
 import com.surajrathod.bcaprogram.network.NetworkService
+import com.surajrathod.bcaprogram.ui.fragments.DashboardFragment
+import com.surajrathod.bcaprogram.ui.fragments.FavouritesFragment
+import com.surajrathod.bcaprogram.ui.fragments.ShareFragment
 import com.surajrathod.bcaprogram.utils.DataStoreConstants
 import com.surajrathod.bcaprogram.utils.TapTargetMaker
 import kotlinx.android.synthetic.main.activity_main.*
@@ -42,7 +49,8 @@ var shareLink : String? = null
 class MainActivity : AppCompatActivity() {
     var thisVersion = BuildConfig.VERSION_NAME.toFloat()
     val tapTargetBuilder = TapTargetMaker()
-
+    lateinit var viewpager : ViewPager2
+    lateinit var tabs : TableLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -100,7 +108,8 @@ class MainActivity : AppCompatActivity() {
             toggleUpdateDialog()
         }
         // Bottom Navigation ----------------------------------------------------------------------------------------------------
-        bottomNavigationView.setupWithNavController(findNavController(R.id.fragmentContainerView))
+//        bottomNavigationView.setupWithNavController(findNavController(R.id.fragmentContainerView))
+        setUpViewPager()
 
     }
     // Class Functions ----------------------------------------------------------------------------------------------------------
@@ -127,6 +136,19 @@ class MainActivity : AppCompatActivity() {
 
     private fun setUpLink(link: String) : Intent {
         return Intent(Intent.ACTION_VIEW, Uri.parse(link))
+    }
+
+    private fun setUpViewPager(){
+        val fragmentList = listOf(DashboardFragment(),FavouritesFragment(),ShareFragment())
+        fragmentContainerView.adapter = MainViewPagerAdapter(fragmentList,supportFragmentManager,lifecycle)
+        bottomNavigationView.setupWithViewPager2(fragmentContainerView)
+      /*  TabLayoutMediator(bottomNavigationView,fragmentContainerView){tab,pos->
+            tab.icon=when(pos){
+                1-> resources.getDrawable(R.drawable.ic_baseline_favorite_24)
+                2->  resources.getDrawable(R.drawable.ic_baseline_share_24)
+                else ->  resources.getDrawable(R.drawable.ic_baseline_home_24)
+            }
+        }.attach()*/
     }
 
     private fun toggleUpdateDialog() {

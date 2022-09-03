@@ -131,5 +131,8 @@ dependencies {
 
     //recyclerview animation
     implementation 'jp.wasabeef:recyclerview-animators:4.0.2'
+
+    // Custom Animated BottomNavBar
+    implementation 'nl.joery.animatedbottombar:library:1.1.0'
 }
 

@@ -28,7 +28,7 @@ import com.surajrathod.bcaprogram.network.NetworkService
 import com.surajrathod.bcaprogram.utils.SpinnerAdapter
 import com.surajrathod.bcaprogram.viewmodel.FavouriteViewModel
 import com.surajrathod.bcaprogram.viewmodel.ProgramViewModel
-import jp.wasabeef.recyclerview.animators.SlideInUpAnimator
+//import jp.wasabeef.recyclerview.animators.SlideInUpAnimator
 import kotlinx.android.synthetic.main.fragment_dashboard.*
 import kotlinx.android.synthetic.main.fragment_dashboard.view.*
 import me.everything.android.ui.overscroll.OverScrollDecoratorHelper

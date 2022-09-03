@@ -7,7 +7,7 @@
     tools:context=".ui.MainActivity"
     android:background="@color/action_bar_color">
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
+   <!-- <com.google.android.material.bottomnavigation.BottomNavigationView
         style="@style/Animation.Design.BottomSheetDialog"
         app:itemIconTint="@drawable/bottom_nav_color"
         app:itemTextColor="@drawable/bottom_nav_color"
@@ -21,6 +21,52 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"/>
 
+    <fragment
+        android:id="@+id/fragmentContainerView"
+        android:name="androidx.navigation.fragment.NavHostFragment"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:defaultNavHost="true"
+        app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:navGraph="@navigation/nav_graph" />-->
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/fragmentContainerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="56dp"
+        app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!--<com.google.android.material.tabs.TabLayout
+        android:id="@+id/bottomNavigationView"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        app:layout_constraintBottom_toBottomOf="parent"/>-->
+
+ <nl.joery.animatedbottombar.AnimatedBottomBar
+     android:id="@+id/bottomNavigationView"
+     app:layout_constraintBottom_toBottomOf="parent"
+     app:layout_constraintLeft_toLeftOf="parent"
+     app:layout_constraintRight_toRightOf="parent"
+     android:layout_width="match_parent"
+     android:layout_height="56dp"
+     android:background="@color/action_bar_color"
+     app:abb_indicatorColor="@color/button_color"
+     app:abb_tabColorSelected="@color/button_color"
+     app:abb_selectedTabType="icon"
+     app:abb_tabColor="@color/white"
+     app:abb_indicatorHeight="4dp"
+     app:abb_indicatorMargin="24dp"
+     app:abb_tabs="@menu/bottom_menu"
+     app:abb_animationInterpolator="@android:anim/overshoot_interpolator"
+     app:abb_selectedIndex="0" />
+
     <View
         android:id="@+id/ttFavBtn"
         android:layout_width="64dp"
@@ -33,17 +79,7 @@
         app:layout_constraintVertical_bias="0.098"
         android:visibility="invisible"/>
 
-    <fragment
-        android:id="@+id/fragmentContainerView"
-        android:name="androidx.navigation.fragment.NavHostFragment"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:defaultNavHost="true"
-        app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:navGraph="@navigation/nav_graph" />
+
 
     <include
         android:id="@+id/updateDialog"
