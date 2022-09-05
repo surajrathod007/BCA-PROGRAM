@@ -26,7 +26,7 @@
     <color name="text_color_bold">#3e416e</color>
     <color name="air_force_blue">#8895c1</color>
     <color name="light_text">#afb2be</color>
-    <color name="action_bar">#3e416e</color>
+    <color name="action_bar">#3e416e</color>  <!-- #3e416e -->
     <color name="mustard">#fedd50</color>
     <color name="mustard_light">#ffbe0a</color>
     <color name="levender">#d9e8fb</color>

@@ -1,5 +1,6 @@
 package com.surajrathod.bcaprogram
 
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
@@ -9,7 +10,7 @@ import com.surajrathod.bcaprogram.ui.fragments.DashboardFragment
 import com.surajrathod.bcaprogram.ui.fragments.FavouritesFragment
 import com.surajrathod.bcaprogram.ui.fragments.ShareFragment
 
-class MainViewPagerAdapter(private val fragments : List<Fragment>,fm : FragmentManager,lifecycle : Lifecycle) : FragmentStateAdapter(fm,lifecycle) {
+class MainViewPagerAdapter( val fragments : List<Fragment>,activity : AppCompatActivity) : FragmentStateAdapter(activity) {
     override fun getItemCount(): Int {
         return fragments.size
     }
