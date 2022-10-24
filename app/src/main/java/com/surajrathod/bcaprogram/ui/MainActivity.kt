@@ -140,7 +140,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun setUpViewPager(){
         val fragmentList = listOf(DashboardFragment(),FavouritesFragment(),ShareFragment())
-        fragmentContainerView.adapter = MainViewPagerAdapter(fragmentList,supportFragmentManager,lifecycle)
+        fragmentContainerView.adapter = MainViewPagerAdapter(fragmentList,this)
         bottomNavigationView.setupWithViewPager2(fragmentContainerView)
       /*  TabLayoutMediator(bottomNavigationView,fragmentContainerView){tab,pos->
             tab.icon=when(pos){
