@@ -66,7 +66,7 @@ class DashboardFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_dashboard, container, false)
         binding = FragmentDashboardBinding.bind(view)
         offlinePage = binding.offlineScreen.root
-//        filterer = binding.Filterer
+//      filterer = binding.Filterer
         binding.programRV.layoutManager = LinearLayoutManager(activity)
 
         OverScrollDecoratorHelper.setUpOverScroll(binding.programRV,ORIENTATION_VERTICAL)
@@ -91,7 +91,7 @@ class DashboardFragment : Fragment() {
                 if(it.isEmpty() && hide){
 
                    binding.noProgramsScreen.root.visibility = VISIBLE
-
+                    binding.programRV.visibility = GONE
                 } else {
                     hide = true
                     refresh()
@@ -215,6 +215,7 @@ class DashboardFragment : Fragment() {
             programViewModel.programsList.value?.let { it -> ProgramAdapter(it.sortedBy { it.id },favViewModel,this)
             }
         binding.noProgramsScreen.root.visibility = GONE
+        binding.programRV.visibility = VISIBLE
     }
     fun toggleLoadingScreen(){
         if(binding.progressLayout.root.visibility == VISIBLE) binding.progressLayout.root.visibility = GONE

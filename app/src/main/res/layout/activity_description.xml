@@ -32,7 +32,9 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:transitionName="@transition/code_title_transition"
+                />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -59,7 +61,8 @@
                 android:text="Nothing fancy here "
                 android:textColor="@color/text_color_bold"
                 android:textSize="16sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:transitionName="title_transition"/>
 
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"

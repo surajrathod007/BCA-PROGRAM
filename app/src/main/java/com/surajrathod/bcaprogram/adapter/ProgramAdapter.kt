@@ -1,6 +1,7 @@
 package com.surajrathod.bcaprogram.adapter
 
 import android.app.Activity
+import android.app.ActivityOptions
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -48,7 +49,8 @@ class ProgramAdapter(private val list: List<ProgramEntity>,val vm : FavouriteVie
             item.setOnClickListener {
                val intent = Intent(it.context,DescriptionActivity::class.java)
                 intent.putExtra("program",program)
-                startActivity(it.context,intent,Bundle())
+                val options = ActivityOptions.makeSceneTransitionAnimation(it.context as Activity,holder.title,"title_transition")
+                it.context.startActivity(intent,options.toBundle())
             }
             CoroutineScope(Dispatchers.IO).launch {
                 setIcon(fav,program.id)

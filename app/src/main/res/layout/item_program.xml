@@ -42,6 +42,7 @@
         android:textSize="15sp"
         android:gravity="center_vertical"
         android:paddingBottom="4dp"
+        android:transitionName="title_transition"
         />
 
         <ImageView

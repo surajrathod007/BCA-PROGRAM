@@ -1,6 +1,12 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Theme.BCAProgram" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <!--<item name="android:windowActivityTransitions">true</item>-->
+        <item name="android:windowContentTransitions">true</item>
+        <item name="android:windowEnterTransition">@android:interpolator/overshoot</item>
+        <item name="android:windowExitTransition">@android:interpolator/overshoot</item>
+       <!-- <item name="android:windowSharedElementEnterTransition">@transition/code_title_transition</item>
+        <item name="android:windowSharedElementExitTransition">@transition/code_title_transition</item>-->
         <!-- Primary brand color. -->
 
         <item name="android:forceDarkAllowed" tools:targetApi="q">false</item>

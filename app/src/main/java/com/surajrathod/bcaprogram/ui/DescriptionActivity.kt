@@ -114,18 +114,7 @@ class DescriptionActivity : AppCompatActivity() {
         txtSem.text = data.sem.toString()
         txtSub.text = data.sub.toString()
         txtUnit.text = data.unit.toString()
-        //txtProgram.text = gk
 
-
-
-
-
-
-
-
-
-
-       // txtProgram.text = g
         println(data.toString())
 
         setSupportActionBar(favToolbar)
@@ -196,7 +185,7 @@ class DescriptionActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             android.R.id.home -> {
-                finish()
+                onBackPressed()
                 return true
             }
         }
