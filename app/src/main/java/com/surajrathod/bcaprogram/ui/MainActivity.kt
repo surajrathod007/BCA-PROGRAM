@@ -22,6 +22,7 @@ import androidx.viewpager2.widget.ViewPager2
 import com.getkeepsafe.taptargetview.TapTarget
 import com.getkeepsafe.taptargetview.TapTargetSequence
 import com.google.android.material.tabs.TabLayoutMediator
+import com.google.firebase.firestore.FirebaseFirestore
 import com.surajrathod.bcaprogram.BuildConfig
 import com.surajrathod.bcaprogram.MainViewPagerAdapter
 import com.surajrathod.bcaprogram.R
@@ -70,6 +71,39 @@ class MainActivity : AppCompatActivity() {
         }
         // App Updates Setup    ---------------------------------------------------------------------------------------------
        var intent = Intent(this,MainActivity::class.java)
+
+        var update = FirebaseFirestore.getInstance().collection("newPrograms").document("appUpdate").get()
+        update.addOnSuccessListener {
+            val data = it.data
+            var update = AppUpdate(
+                id = 1,
+                link = it.get("link").toString(),
+                version = it.get("version").toString().toFloat(),
+                message = it.get("message").toString(),
+            )
+            if(update.version>thisVersion){
+                msg.text = msg.text.toString() + update.message
+                GlobalScope.launch {
+                    preferenceDataStore.edit {
+                        it[stringPreferencesKey(DataStoreConstants.DS_KEY_APP_SHARING_LINK)] = update.link
+                    }
+                }
+                intent = setUpLink(update.link)
+                toggleUpdateDialog()
+            }
+            if(shareLink==null){
+                GlobalScope.launch {
+                    preferenceDataStore.edit {
+                        it[stringPreferencesKey(DataStoreConstants.DS_KEY_APP_SHARING_LINK)] = update.link
+                    }
+                }
+                shareLink = update.link
+            }
+        }
+            .addOnFailureListener {
+                Toast.makeText(this@MainActivity,"Update check failed !",Toast.LENGTH_LONG).show()
+            }
+        /*
        val checkUpdates = NetworkService.networkInstance.checkForUpdates()
         checkUpdates.enqueue(object : Callback<AppUpdate> {
             override fun onResponse(call: Call<AppUpdate>, response: Response<AppUpdate>) {
@@ -99,6 +133,9 @@ class MainActivity : AppCompatActivity() {
                println("RETROFIT ERROR WHILE CHECKING UPDATES : $t")
             }
         })
+         */
+
+
         updateBtn.setOnClickListener{
             Toast.makeText(this@MainActivity, "updating..", Toast.LENGTH_SHORT).show()
             toggleUpdateDialog()

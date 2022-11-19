@@ -13,6 +13,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import com.google.firebase.firestore.FirebaseFirestore
 import com.surajrathod.bcaprogram.R
 import com.surajrathod.bcaprogram.databinding.FragmentShareBinding
 import com.surajrathod.bcaprogram.model.AppUpdate
@@ -30,8 +31,8 @@ class ShareFragment : Fragment() {
 
     //val update : AppUpdate = NetworkService.networkInstance.checkForUpdate()
 
-    lateinit var btnShare : Button
-    lateinit var app : Update
+    lateinit var btnShare: Button
+    lateinit var app: Update
     lateinit var binding: FragmentShareBinding
 
 
@@ -48,13 +49,13 @@ class ShareFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_share, container, false)
 
-        binding = FragmentShareBinding.inflate(inflater,container,false)
+        binding = FragmentShareBinding.inflate(inflater, container, false)
 
         var appLink = ""
-        if(checkInternet(requireContext())){
+        if (checkInternet(requireContext())) {
             loadUpdate()
             //appLink = app.link.toString()
-        }else{
+        } else {
             binding.txtMessage.text = "Pls turn on internet"
             appLink = " "
         }
@@ -71,16 +72,18 @@ class ShareFragment : Fragment() {
 
         binding.btnShare.setOnClickListener {
 
-            if(checkInternet(it.context)){
+            if (checkInternet(it.context)) {
                 val intent = Intent()
                 intent.action = Intent.ACTION_SEND
                 intent.type = "text/plain"
-                intent.putExtra(Intent.EXTRA_TEXT,"Hey i found an app where you can get all BCA Practical programs for free!! \n Download Now : ${app.link}")
-                startActivity(Intent.createChooser(intent,"Share With Friends"))
-            }else{
-                Toast.makeText(requireContext(),"No internet",Toast.LENGTH_SHORT).show()
+                intent.putExtra(
+                    Intent.EXTRA_TEXT,
+                    "Hey i found an app where you can get all BCA Practical programs for free!! \n Download Now : ${app.link}"
+                )
+                startActivity(Intent.createChooser(intent, "Share With Friends"))
+            } else {
+                Toast.makeText(requireContext(), "No internet", Toast.LENGTH_SHORT).show()
             }
-
 
 
         }
@@ -90,18 +93,14 @@ class ShareFragment : Fragment() {
 
     }
 
-    fun setUpdate(body : Update){
+    fun setUpdate(body: Update) {
         app = body
     }
 
 
-
-    fun loadUpdate()
-    {
+    fun loadUpdate() {
+        /*
         val response = NetworkService.networkInstance.checkForUpdates()
-
-
-
         // ctrl+shift+space
         response.enqueue(object : Callback<AppUpdate?> {
             override fun onResponse(call: Call<AppUpdate?>, response: Response<AppUpdate?>) {
@@ -126,19 +125,40 @@ class ShareFragment : Fragment() {
             }
         })
 
+         */
+
+        val update =
+            FirebaseFirestore.getInstance().collection("newPrograms").document("appUpdate").get()
+        update.addOnSuccessListener {
+            if (it.exists()) {
+                var msg = it.get("message").toString()
+                var not = it.get("notice").toString()
+                txtMessage.text = "If you find any error in code , then please report that program !"
+                txtNotice.text = not.replace("\\n", "\n")
+                setUpdate(
+                    Update(
+                        id = 1,
+                        link = it.get("link").toString(),
+                        version = it.get("version").toString().toFloat(),
+                        message = it.get("message").toString(),
+                        notice = it.get("notice").toString()
+                    )
+                )
+            }
+        }
 
 
     }
 
-    fun checkInternet(context : Context) : Boolean{
-        val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+    fun checkInternet(context: Context): Boolean {
+        val connectivityManager =
+            context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
 
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
-        {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             val network = connectivityManager.activeNetwork ?: return false
             val activeNetwork = connectivityManager.getNetworkCapabilities(network) ?: return false
 
-            return when{
+            return when {
 
                 activeNetwork.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> true
 
@@ -147,7 +167,7 @@ class ShareFragment : Fragment() {
                 else -> false
 
             }
-        }else{
+        } else {
 
             val netInfo = connectivityManager.activeNetworkInfo ?: return false
 
@@ -157,10 +177,11 @@ class ShareFragment : Fragment() {
     }
 
     data class Update(
-        var id : Int,
-        var version : Float,
-        var link : String,
-        var message : String = ""
+        var id: Int,
+        var version: Float,
+        var link: String,
+        var message: String = "",
+        var notice : String = ""
     )
 
 }
