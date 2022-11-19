@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheckedTextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:textSize="16sp"
+    android:padding="14dp"
+    android:textStyle="bold"
+    android:layout_width="match_parent"
+    android:layout_height="?attr/dropdownListPreferredItemHeight"
+    android:singleLine="true"
+    android:text="Sample"
+    android:textColor="@color/text_color_bold"
+    android:ellipsize="marquee"
+    android:fontFamily="@font/main_regular"
+    >
+
+</CheckedTextView>

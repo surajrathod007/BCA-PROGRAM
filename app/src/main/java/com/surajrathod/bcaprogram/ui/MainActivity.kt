@@ -70,12 +70,12 @@ class MainActivity : AppCompatActivity() {
             }
         }
         // App Updates Setup    ---------------------------------------------------------------------------------------------
-       var intent = Intent(this,MainActivity::class.java)
+        var intent = Intent(this,MainActivity::class.java)
 
-        var update = FirebaseFirestore.getInstance().collection("newPrograms").document("appUpdate").get()
+        val update = FirebaseFirestore.getInstance().collection("newPrograms").document("appUpdate").get()
         update.addOnSuccessListener {
             val data = it.data
-            var update = AppUpdate(
+            val update = AppUpdate(
                 id = 1,
                 link = it.get("link").toString(),
                 version = it.get("version").toString().toFloat(),

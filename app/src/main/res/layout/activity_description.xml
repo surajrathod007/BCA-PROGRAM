@@ -112,6 +112,8 @@
 
 
             <TextView
+                android:clickable="true"
+                android:foreground="?attr/selectableItemBackground"
                 android:id="@+id/reportProgram"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

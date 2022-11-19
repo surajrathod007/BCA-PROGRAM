@@ -21,7 +21,7 @@ class ProgramViewModel : ViewModel() {
     //firstore
     var db = FirebaseFirestore.getInstance()
     val pSize = MutableLiveData<Int>(0)
-    var msg = MutableLiveData<String>("")
+    var msg = MutableLiveData<String>()
 
     private val _programsList = MutableLiveData<MutableList<ProgramEntity>>(mutableListOf())
     val programsList: LiveData<MutableList<ProgramEntity>>
@@ -103,7 +103,7 @@ class ProgramViewModel : ViewModel() {
                         )
                         mList.add(p)
                     }
-                    msg.postValue(mList.size.toString())
+                    //msg.postValue(mList.size.toString())
                     //clearPrograms()
                     _programsList.postValue(mList)
                     _loading.postValue(false)

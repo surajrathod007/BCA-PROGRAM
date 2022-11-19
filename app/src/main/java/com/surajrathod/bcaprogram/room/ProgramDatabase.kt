@@ -22,7 +22,6 @@ abstract class ProgramDatabase : RoomDatabase() {
         private var INSTANCE : ProgramDatabase? = null
 
         fun getDatabase(context: Context) : ProgramDatabase{
-
             if(INSTANCE==null)
             {
                 synchronized(this){
@@ -33,7 +32,6 @@ abstract class ProgramDatabase : RoomDatabase() {
                     ).build()
                 }
             }
-
             return INSTANCE!!
         }
     }

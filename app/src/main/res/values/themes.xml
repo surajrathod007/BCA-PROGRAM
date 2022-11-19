@@ -21,4 +21,12 @@
         <item name="android:statusBarColor" tools:targetApi="l">@color/action_bar</item>
         <!-- Customize your theme here. -->
     </style>
+
+    <!-- only for bottombar font -->
+    <style name="custom_bottom_font" parent="TextAppearance.AppCompat.Medium">
+        <item name="fontFamily">@font/main_regular</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textStyle">bold</item>
+
+    </style>
 </resources>

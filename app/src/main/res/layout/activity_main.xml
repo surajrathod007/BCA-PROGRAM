@@ -51,6 +51,7 @@
 
  <nl.joery.animatedbottombar.AnimatedBottomBar
      android:id="@+id/bottomNavigationView"
+     app:abb_textAppearance="@style/custom_bottom_font"
      app:layout_constraintBottom_toBottomOf="parent"
      app:layout_constraintLeft_toLeftOf="parent"
      app:layout_constraintRight_toRightOf="parent"
@@ -58,6 +59,7 @@
      android:layout_height="56dp"
      android:background="@color/action_bar"
      app:abb_indicatorColor="@color/button_color"
+     app:abb_indicatorAppearance="round"
      app:abb_tabColorSelected="@color/button_color"
      app:abb_selectedTabType="text"
      app:abb_tabColor="@color/white"

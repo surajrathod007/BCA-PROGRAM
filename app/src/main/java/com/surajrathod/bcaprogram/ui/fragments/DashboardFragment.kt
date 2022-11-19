@@ -10,6 +10,7 @@ import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.animation.OvershootInterpolator
 import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.widget.AppCompatButton
@@ -35,16 +36,7 @@ import kotlinx.android.synthetic.main.fragment_dashboard.view.*
 import me.everything.android.ui.overscroll.OverScrollDecoratorHelper
 import me.everything.android.ui.overscroll.OverScrollDecoratorHelper.ORIENTATION_VERTICAL
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [DashboardFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class DashboardFragment : Fragment() {
 
     lateinit var programViewModel: ProgramViewModel
@@ -100,13 +92,10 @@ class DashboardFragment : Fragment() {
             })
         }
 
-
-
-
         programViewModel.msg.observe(viewLifecycleOwner){
             Toast.makeText(requireContext(),"Msg :  $it",Toast.LENGTH_LONG).show()
         }
-        programViewModel.getAllPrograms()
+        //programViewModel.getAllPrograms()
         with(binding){
             activity?.let {
                 semSpinner.adapter = spinnerAdapter.createAdapter(it, programViewModel.semList)
@@ -125,7 +114,6 @@ class DashboardFragment : Fragment() {
                         subjectSpinner.adapter = spinnerAdapter.createAdapter(it,
                             programViewModel.subjectmutableMap[position+1]!!
                         )
-
                         unitSpinner.setSelection(0)
                         hide = false
                        programViewModel.curSemester.value = semSpinner.selectedItem.toString()
@@ -140,16 +128,6 @@ class DashboardFragment : Fragment() {
         }
 
         setOnSpinnerItemSelected()
-       /* binding.searchButton.setOnClickListener{
-            enableSearch()
-        }*/
-
-        //add to firestore
-
-
-
-
-
         return view
     }
 
@@ -234,23 +212,5 @@ class DashboardFragment : Fragment() {
         else binding.progressLayout.root.visibility = VISIBLE
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment DashboardFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            DashboardFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
-    }
+
 }
