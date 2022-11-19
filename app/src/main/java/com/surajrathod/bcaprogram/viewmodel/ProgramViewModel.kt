@@ -113,7 +113,6 @@ class ProgramViewModel : ViewModel() {
                     clearPrograms()
                     refresh()
                     _loading.postValue(false)
-
                 }
         } catch (e: Exception) {
             msg.postValue(e.message)
