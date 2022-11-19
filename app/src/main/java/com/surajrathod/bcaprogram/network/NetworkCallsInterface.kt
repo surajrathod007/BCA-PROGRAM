@@ -15,5 +15,8 @@ interface NetworkCallsInterface {
     @GET("get")
     fun checkForUpdates() : Call<AppUpdate>
 
+    @GET("programs")
+    fun getData() : Call<List<ProgramEntity>>
+
 
 }

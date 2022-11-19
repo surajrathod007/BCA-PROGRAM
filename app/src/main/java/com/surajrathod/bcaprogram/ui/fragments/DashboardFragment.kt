@@ -11,6 +11,7 @@ import android.view.View.VISIBLE
 import android.view.animation.OvershootInterpolator
 import android.widget.AdapterView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.widget.AppCompatButton
 import androidx.appcompat.widget.LinearLayoutCompat
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -75,13 +76,13 @@ class DashboardFragment : Fragment() {
         favViewModel = ViewModelProvider(this).get(FavouriteViewModel::class.java)
         favViewModel.setUpDataBase(activity as Context)
 
-        programViewModel.isloading.observe(viewLifecycleOwner,{
-            if(!it){
+        programViewModel.isloading.observe(viewLifecycleOwner) {
+            if (!it) {
                 binding.loadingAnimation.root.visibility = GONE
-            }else{
+            } else {
                 binding.loadingAnimation.root.visibility = VISIBLE
             }
-        })
+        }
 
         with(programViewModel){
            setObserver(curSemester)
@@ -100,6 +101,12 @@ class DashboardFragment : Fragment() {
         }
 
 
+
+
+        programViewModel.msg.observe(viewLifecycleOwner){
+            Toast.makeText(requireContext(),"Msg :  $it",Toast.LENGTH_LONG).show()
+        }
+        programViewModel.getAllPrograms()
         with(binding){
             activity?.let {
                 semSpinner.adapter = spinnerAdapter.createAdapter(it, programViewModel.semList)
@@ -137,6 +144,9 @@ class DashboardFragment : Fragment() {
             enableSearch()
         }*/
 
+        //add to firestore
+
+
 
 
 
@@ -159,7 +169,9 @@ class DashboardFragment : Fragment() {
             }
                 toggleLoadingScreen()
                 with(programViewModel) {
-                    getRemotePrograms(curSemester.value!!, curSubject.value!!, curUnit.value!!)
+                    //TODO : Change Date Source Api/Firestore
+                    //getRemotePrograms(curSemester.value!!, curSubject.value!!, curUnit.value!!)
+                    getFirestorePrograms(curSemester.value!!, curSubject.value!!, curUnit.value!!)
                 }
                 Handler().postDelayed({
                     toggleLoadingScreen()
