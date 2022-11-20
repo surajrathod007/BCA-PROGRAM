@@ -17,6 +17,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.surajrathod.bcaprogram.R
 import com.surajrathod.bcaprogram.databinding.FragmentShareBinding
 import com.surajrathod.bcaprogram.model.AppUpdate
+import com.surajrathod.bcaprogram.model.Quote
 import com.surajrathod.bcaprogram.network.NetworkService
 import com.surajrathod.bcaprogram.ui.DescriptionActivity
 import com.surajrathod.bcaprogram.ui.MainActivity
@@ -51,6 +52,7 @@ class ShareFragment : Fragment() {
 
         binding = FragmentShareBinding.inflate(inflater, container, false)
 
+        loadQuote()
         var appLink = ""
         if (checkInternet(requireContext())) {
             loadUpdate()
@@ -88,9 +90,26 @@ class ShareFragment : Fragment() {
 
         }
 
+        binding.cardQuote.setOnClickListener {
+            loadQuote()
+        }
+
         return binding.root
 
 
+    }
+
+    private fun loadQuote() {
+        val q = NetworkService.networkInstance.getQuote()
+        q.enqueue(object : Callback<Quote?> {
+            override fun onResponse(call: Call<Quote?>, response: Response<Quote?>) {
+                binding.txtQuote.text =
+                    response.body()!!.en.toString() + "\n" + "- " + response.body()!!.author.toString()
+            }
+            override fun onFailure(call: Call<Quote?>, t: Throwable) {
+                binding.txtQuote.text = "Please check your network !"
+            }
+        })
     }
 
     fun setUpdate(body: Update) {
@@ -133,7 +152,8 @@ class ShareFragment : Fragment() {
             if (it.exists()) {
                 var msg = it.get("message").toString()
                 var not = it.get("notice").toString()
-                txtMessage.text = "If you find any error in code , then please report that program !"
+                txtMessage.text =
+                    "If you find any error in code , then please report that program !"
                 txtNotice.text = not.replace("\\n", "\n")
                 setUpdate(
                     Update(
@@ -181,7 +201,7 @@ class ShareFragment : Fragment() {
         var version: Float,
         var link: String,
         var message: String = "",
-        var notice : String = ""
+        var notice: String = ""
     )
 
 }

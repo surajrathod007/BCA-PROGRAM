@@ -13,7 +13,10 @@ import androidx.appcompat.app.AppCompatActivity
 
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.ViewCompositionStrategy
+import androidx.datastore.preferences.core.edit
+import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.lifecycle.ViewModelProvider
+import com.google.firebase.firestore.FirebaseFirestore
 
 import com.surajrathod.bcaprogram.R
 import com.surajrathod.bcaprogram.databinding.ActivityDescriptionBinding
@@ -21,8 +24,10 @@ import com.surajrathod.bcaprogram.model.AppUpdate
 import com.surajrathod.bcaprogram.model.ProgramEntity
 import com.surajrathod.bcaprogram.network.NetworkService
 import com.surajrathod.bcaprogram.ui.fragments.ShareFragment
+import com.surajrathod.bcaprogram.utils.DataStoreConstants
 import com.surajrathod.bcaprogram.viewmodel.FavouriteViewModel
 import kotlinx.android.synthetic.main.activity_description.*
+import kotlinx.android.synthetic.main.update_dialog_layout.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -36,23 +41,16 @@ import java.util.regex.Pattern
 
 class DescriptionActivity : AppCompatActivity() {
 
-
-
-
-
     lateinit var favViewModel : FavouriteViewModel
 
     lateinit var binding: ActivityDescriptionBinding
 
     lateinit var app : Update
 
-
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        loadUpdate()
+        //loadUpdate()
         val data = intent.getSerializableExtra("program") as com.surajrathod.bcaprogram.model.ProgramEntity
 
         binding = ActivityDescriptionBinding.inflate(layoutInflater)
@@ -122,60 +120,6 @@ class DescriptionActivity : AppCompatActivity() {
         supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_baseline_arrow_back_ios_24)
     }
 
-//
-//    fun setupCodeView()
-//    {
-//
-//
-//        val pairCompleteMap: MutableMap<Char, Char> = HashMap()
-//        pairCompleteMap['{'] = '}'
-//        pairCompleteMap['['] = ']'
-//        pairCompleteMap['('] = ')'
-//        pairCompleteMap['<'] = '>'
-//        pairCompleteMap['"'] = '"'
-//        pairCompleteMap['\''] = '\''
-//
-//        val characterSet: MutableSet<Char> = HashSet()
-//        characterSet.add('{')
-//
-//        val characterSet2: MutableSet<Char> = java.util.HashSet()
-//        characterSet.add('{')
-//
-//        binding.codeView.apply {
-//            setEnableAutoIndentation(true)
-//            setEnableLineNumber(true)
-//            setPairCompleteMap(pairCompleteMap)
-//            enablePairComplete(true)
-//            enablePairCompleteCenterCursor(true)
-//            setTabLength(4)
-//            setIndentationStarts(characterSet)
-//            setIndentationEnds(characterSet2)
-//            setLineNumberTextColor(Color.GRAY)
-//            setLineNumberTextSize(25f)
-//            setText(data.content)
-//
-//
-//        }
-//
-//        binding.codeView.resetHighlighter()
-//
-//        binding.codeView.addSyntaxPattern(PATTERN_HEX,resources.getColor(R.color.white));
-//        binding.codeView.addSyntaxPattern(PATTERN_CHAR,resources.getColor(R.color.white));
-//        binding.codeView.addSyntaxPattern(PATTERN_STRING, resources.getColor(R.color.white));
-//        binding.codeView.addSyntaxPattern(PATTERN_NUMBERS, resources.getColor(R.color.white));
-//        binding.codeView.addSyntaxPattern(PATTERN_KEYWORDS, resources.getColor(R.color.white));
-//        binding.codeView.addSyntaxPattern(PATTERN_BUILTINS, resources.getColor(R.color.white));
-//        binding.codeView.addSyntaxPattern(PATTERN_SINGLE_LINE_COMMENT, resources.getColor(R.color.white));
-//        binding.codeView.addSyntaxPattern(PATTERN_MULTI_LINE_COMMENT,resources.getColor(R.color.white));
-//        binding.codeView.addSyntaxPattern(PATTERN_ANNOTATION, resources.getColor(R.color.white));
-//        binding.codeView.addSyntaxPattern(PATTERN_ATTRIBUTE, resources.getColor(R.color.white));
-//        binding.codeView.addSyntaxPattern(PATTERN_GENERIC, resources.getColor(R.color.white));
-//        binding.codeView.addSyntaxPattern(PATTERN_OPERATION, resources.getColor(R.color.white));
-//
-//        binding.codeView.reHighlightSyntax()
-//    }
-
-
     private fun setFavIcon(data : Int){
         val isFav = favViewModel.isFav(data)
        CoroutineScope(Dispatchers.Main).launch {  if(isFav) binding.btnFav.setImageDrawable(resources.getDrawable(R.drawable.ic_baseline_favorite_24))
@@ -194,6 +138,8 @@ class DescriptionActivity : AppCompatActivity() {
 
 
     fun loadUpdate(){
+
+        /*
         NetworkService.networkInstance.checkForUpdates().enqueue(object : Callback<AppUpdate?> {
             override fun onResponse(call: Call<AppUpdate?>, response: Response<AppUpdate?>) {
 
@@ -206,10 +152,24 @@ class DescriptionActivity : AppCompatActivity() {
                 println("RETROFIT ERROR WHILE CHECKING UPDATES IN DESCRIPTION ACTIVITY: $t")
             }
         })
+         */
+        val update = FirebaseFirestore.getInstance().collection("newPrograms").document("appUpdate").get()
+        update.addOnSuccessListener {
+            val data = it.data
+            val update = Update(
+                id = 1,
+                link = it.get("link").toString(),
+                version = it.get("version").toString().toFloat(),
+                message = it.get("message").toString(),
+            )
+            setUpdate(update)
+        }
+            .addOnFailureListener {
+                Toast.makeText(this@DescriptionActivity,"Update check failed !",Toast.LENGTH_LONG).show()
+            }
     }
 
     private fun setUpdate(u: Update) {
-
         app = u
     }
 

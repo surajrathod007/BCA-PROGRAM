@@ -126,7 +126,6 @@ class DashboardFragment : Fragment() {
                 }
             }
         }
-
         setOnSpinnerItemSelected()
         return view
     }
@@ -155,6 +154,7 @@ class DashboardFragment : Fragment() {
                     toggleLoadingScreen()
                 }, 500)
         }else{
+            Toast.makeText(requireContext(),"No internet connection !",Toast.LENGTH_LONG).show()
                if(offlinePage.isVisible){
 
                }else{

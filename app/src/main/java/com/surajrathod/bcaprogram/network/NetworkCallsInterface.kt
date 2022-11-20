@@ -2,11 +2,12 @@ package com.surajrathod.bcaprogram.network
 
 import com.surajrathod.bcaprogram.model.AppUpdate
 import com.surajrathod.bcaprogram.model.ProgramEntity
+import com.surajrathod.bcaprogram.model.Quote
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query
 
-const val BASE_URL = "https://desolate-ocean-39685.herokuapp.com/v1/"
+const val BASE_URL = "https://programming-quotes-api.herokuapp.com/quotes/"
 interface NetworkCallsInterface {
 
     @GET("programs/specific")
@@ -18,5 +19,7 @@ interface NetworkCallsInterface {
     @GET("programs")
     fun getData() : Call<List<ProgramEntity>>
 
+    @GET("random")
+    fun getQuote() : Call<Quote>
 
 }

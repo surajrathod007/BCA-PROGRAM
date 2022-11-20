@@ -18,8 +18,8 @@ android {
         applicationId "com.surajrathod.bcaprogram"
         minSdk 21
         targetSdk 31
-        versionCode 6
-        versionName "1.4"
+        versionCode 7
+        versionName "1.5"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -136,5 +136,8 @@ dependencies {
 
     // Custom Animated BottomNavBar
     implementation 'nl.joery.animatedbottombar:library:1.1.0'
+
+    //onesignal
+    implementation 'com.onesignal:OneSignal:[4.0.0, 4.99.99]'
 }
 

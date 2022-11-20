@@ -48,10 +48,10 @@ class ProgramViewModel : ViewModel() {
         _programsList.value = _programsList.value
     }
 
+    //TODO : Remove this later , no need to do server call
     fun getRemotePrograms(sem: String, sub: String, unit: String) {
 
         _loading.postValue(true)
-
 
         val response = NetworkService.networkInstance.fetchPrograms(sem, sub, unit)
         println("Response is $response")
@@ -109,7 +109,7 @@ class ProgramViewModel : ViewModel() {
                     _loading.postValue(false)
                     //refresh()
                 }.addOnFailureListener {
-                    msg.postValue(it.message.toString())
+                    msg.postValue("Failure"+it.message.toString())
                     clearPrograms()
                     refresh()
                     _loading.postValue(false)
@@ -120,6 +120,7 @@ class ProgramViewModel : ViewModel() {
 
     }
 
+    //TODO : Remove this later , no need to do server call
     fun getAllPrograms(){
         try{
             val r = NetworkService.networkInstance.getData()
