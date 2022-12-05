@@ -52,7 +52,7 @@ class ShareFragment : Fragment() {
 
         binding = FragmentShareBinding.inflate(inflater, container, false)
 
-        loadQuote()
+        //loadQuote()
         var appLink = ""
         if (checkInternet(requireContext())) {
             loadUpdate()
@@ -90,15 +90,13 @@ class ShareFragment : Fragment() {
 
         }
 
-        binding.cardQuote.setOnClickListener {
-            loadQuote()
-        }
 
         return binding.root
 
 
     }
 
+    /*
     private fun loadQuote() {
         val q = NetworkService.networkInstance.getQuote()
         q.enqueue(object : Callback<Quote?> {
@@ -111,6 +109,7 @@ class ShareFragment : Fragment() {
             }
         })
     }
+     */
 
     fun setUpdate(body: Update) {
         app = body
