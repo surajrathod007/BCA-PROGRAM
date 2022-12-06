@@ -5,38 +5,32 @@ import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuInflater
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.widget.TableLayout
+import android.widget.TextView
 import android.widget.Toast
-import androidx.core.view.isVisible
+import androidx.appcompat.app.AlertDialog
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
-import androidx.navigation.findNavController
-import androidx.navigation.ui.setupWithNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.getkeepsafe.taptargetview.TapTarget
 import com.getkeepsafe.taptargetview.TapTargetSequence
-import com.google.android.material.tabs.TabLayoutMediator
 import com.google.firebase.firestore.FirebaseFirestore
 import com.surajrathod.bcaprogram.BuildConfig
 import com.surajrathod.bcaprogram.MainViewPagerAdapter
 import com.surajrathod.bcaprogram.R
 import com.surajrathod.bcaprogram.model.AppUpdate
-import com.surajrathod.bcaprogram.network.NetworkService
 import com.surajrathod.bcaprogram.ui.fragments.DashboardFragment
 import com.surajrathod.bcaprogram.ui.fragments.FavouritesFragment
 import com.surajrathod.bcaprogram.ui.fragments.ShareFragment
 import com.surajrathod.bcaprogram.utils.DataStoreConstants
 import com.surajrathod.bcaprogram.utils.TapTargetMaker
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.fragment_dashboard.*
 import kotlinx.android.synthetic.main.update_dialog_layout.*
 import kotlinx.android.synthetic.main.welcome_screen.*
 import kotlinx.coroutines.CoroutineScope
@@ -44,9 +38,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+
 val Context.preferenceDataStore : DataStore<Preferences> by preferencesDataStore(DataStoreConstants.DATA_STORE_NAME)
 var shareLink : String? = null
 class MainActivity : AppCompatActivity() {
@@ -84,14 +76,15 @@ class MainActivity : AppCompatActivity() {
                 message = it.get("message").toString(),
             )
             if(update.version>thisVersion){
-                msg.text = msg.text.toString() + update.message
+                //msg.text = msg.text.toString() + update.message
                 GlobalScope.launch {
                     preferenceDataStore.edit {
                         it[stringPreferencesKey(DataStoreConstants.DS_KEY_APP_SHARING_LINK)] = update.link
                     }
                 }
                 intent = setUpLink(update.link)
-                toggleUpdateDialog()
+                //toggleUpdateDialog()
+                showUpdateDialog(update.message,update.link)
             }
             if(shareLink==null){
                 GlobalScope.launch {
@@ -138,6 +131,7 @@ class MainActivity : AppCompatActivity() {
          */
 
 
+        /*
         updateBtn.setOnClickListener{
             Toast.makeText(this@MainActivity, "updating..", Toast.LENGTH_SHORT).show()
             toggleUpdateDialog()
@@ -146,11 +140,26 @@ class MainActivity : AppCompatActivity() {
         laterBtn.setOnClickListener{
             toggleUpdateDialog()
         }
+         */
         // Bottom Navigation ----------------------------------------------------------------------------------------------------
 //        bottomNavigationView.setupWithNavController(findNavController(R.id.fragmentContainerView))
         setUpViewPager()
-
     }
+
+    private fun showUpdateDialog(msg: String,link : String) {
+        val d = AlertDialog.Builder(this)
+        d.setTitle("Update available !")
+        d.setMessage(msg.replace("\\n","\n"))
+        d.setCancelable(true)
+        d.setPositiveButton("Update"){v,m ->
+            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(link)))
+        }
+        d.setNegativeButton("Later"){v,m->
+            v.dismiss()
+        }
+        d.show()
+    }
+
     // Class Functions ----------------------------------------------------------------------------------------------------------
     private fun setUpTutorial(){
         bottomNavigationView.visibility = GONE
@@ -206,15 +215,15 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun toggleUpdateDialog() {
-        if(updateDialog.isVisible){
-            updateDialog.visibility = GONE
-            bottomNavigationView.visibility = VISIBLE
-
-        }else{
-
-            updateDialog.visibility = VISIBLE
-            bottomNavigationView.visibility = GONE
-        }
+//        if(updateDialog.isVisible){
+//            updateDialog.visibility = GONE
+//            bottomNavigationView.visibility = VISIBLE
+//
+//        }else{
+//
+//            updateDialog.visibility = VISIBLE
+//            bottomNavigationView.visibility = GONE
+//        }
     }
 
     private fun createTapTargetSequence(): TapTargetSequence? {
