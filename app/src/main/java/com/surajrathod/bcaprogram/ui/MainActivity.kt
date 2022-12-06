@@ -5,6 +5,8 @@ import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuInflater
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.widget.TableLayout
@@ -155,10 +157,25 @@ class MainActivity : AppCompatActivity() {
         welcomeScreen.visibility = VISIBLE
 
         getStartedBtn.setOnClickListener {
-            val tutorial = createTapTargetSequence()!!
-            tutorial.start()
-            bottomNavigationView.visibility = VISIBLE
-            welcomeScreen.visibility = GONE
+            try{
+
+//                val tutorial = createTapTargetSequence()!!
+//                tutorial.start()
+//                bottomNavigationView.visibility = VISIBLE
+//                welcomeScreen.visibility = GONE
+
+
+                bottomNavigationView.visibility = VISIBLE
+                welcomeScreen.visibility = GONE
+                GlobalScope.launch {
+                    preferenceDataStore.edit {
+                        it[booleanPreferencesKey(DataStoreConstants.DS_KEY_IS_TUTORIAL_DONE)] = true
+                    }
+                }
+            }catch (e : Exception){
+                Toast.makeText(this@MainActivity,e.message.toString(),Toast.LENGTH_LONG).show()
+            }
+
         }
         skipBtn.setOnClickListener {
             bottomNavigationView.visibility = VISIBLE
@@ -201,12 +218,14 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun createTapTargetSequence(): TapTargetSequence? {
+
+
         return TapTargetSequence(this).targets(
-            tapTargetBuilder.createTapTarget(findViewById(R.id.dashboardFragment), "Home ","Here You will Get All Programs for Your BCA Journey"),
-            tapTargetBuilder.createTapTarget(searchButton,"Search","Find Programs for your different Semesters and Subjects"),
-            tapTargetBuilder.createTapTarget(findViewById(R.id.ttFavBtn),"Make It Favourite","Mark Programs with ❤ to Find Them Quickly"),
-            tapTargetBuilder.createTapTarget(findViewById(R.id.favouritesFragment),"Favourites","Your ❤ Programs will Appear here Offline for You "),
-            tapTargetBuilder.createTapTarget(findViewById(R.id.shareFragment),"Sharing Is Caring", "Share this App with Your \nBCA mates , Happy Coding !"),
+            //tapTargetBuilder.createTapTarget(findViewById(1000005), "Home ","Here You will Get All Programs for Your BCA Journey"),
+            //tapTargetBuilder.createTapTarget(searchButton,"Search","Find Programs for your different Semesters and Subjects"),
+            tapTargetBuilder.createTapTarget(this.findViewById(R.id.ttFavBtn),"Make It Favourite","Mark Programs with ❤ to Find Them Quickly"),
+            tapTargetBuilder.createTapTarget(this.findViewById(R.id.favouritesFragments),"Favourites","Your ❤ Programs will Appear here Offline for You "),
+            tapTargetBuilder.createTapTarget(this.findViewById(R.id.shareFragment),"Sharing Is Caring", "Share this App with Your \nBCA mates , Happy Coding !"),
         ).listener(object : TapTargetSequence.Listener{
             override fun onSequenceFinish() {
 
