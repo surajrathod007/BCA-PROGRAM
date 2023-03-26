@@ -24,7 +24,6 @@
             android:layout_height="match_parent">
 
             <ImageView
-                android:tint="@color/white"
                 android:id="@+id/btnFav"
                 android:layout_marginRight="10dp"
                 android:src="@drawable/ic_baseline_favorite_border_24"
@@ -34,7 +33,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:transitionName="@transition/code_title_transition"
-                />
+                app:tint="@color/white" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
