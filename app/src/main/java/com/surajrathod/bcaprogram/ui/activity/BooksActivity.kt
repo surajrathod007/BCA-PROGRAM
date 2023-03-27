@@ -26,6 +26,13 @@ class BooksActivity : AppCompatActivity() {
         } else {
             Toast.makeText(this, "Sem is null", Toast.LENGTH_SHORT).show()
         }
+        setupClickListeners()
+    }
+
+    private fun setupClickListeners() {
+        binding.btnBackBooks.setOnClickListener {
+            finish()
+        }
     }
 
     private fun loadBooksBySem(sem: String) {

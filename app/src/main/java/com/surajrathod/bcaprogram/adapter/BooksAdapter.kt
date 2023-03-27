@@ -1,6 +1,7 @@
 package com.surajrathod.bcaprogram.adapter
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast
@@ -10,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.bumptech.glide.Glide
 import com.surajrathod.bcaprogram.databinding.BookItemLayoutBinding
 import com.surajrathod.bcaprogram.model.Book
+import com.surajrathod.bcaprogram.ui.activity.BookDetailsActivity
 
 class BooksAdapter(val c: Context, val l: List<Book>) : Adapter<BooksAdapter.BooksViewHolder>() {
 
@@ -26,7 +28,10 @@ class BooksAdapter(val c: Context, val l: List<Book>) : Adapter<BooksAdapter.Boo
         with(holder){
             Glide.with(c).load(book.imageUrl).into(imgBookPoster)
             imgBookPoster.setOnClickListener {
-                Toast.makeText(it.context, "You clicked : ${book.title}", Toast.LENGTH_SHORT).show()
+                //Toast.makeText(it.context, "You clicked : ${book.title}", Toast.LENGTH_SHORT).show()
+                val i = Intent(c,BookDetailsActivity::class.java)
+                i.putExtra("book",book)
+                c.startActivity(i)
             }
         }
     }

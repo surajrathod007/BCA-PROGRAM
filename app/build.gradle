@@ -140,5 +140,8 @@ dependencies {
 
     //onesignal
     implementation 'com.onesignal:OneSignal:[4.0.0, 4.99.99]'
+
+    //carosoule
+    implementation 'com.github.alirezat775:carousel-view:1.1.1'
 }
 
