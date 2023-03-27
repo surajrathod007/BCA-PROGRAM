@@ -114,7 +114,6 @@ class BookDetailsActivity : AppCompatActivity() {
                 val chip = Chip(this@BookDetailsActivity)
                 chip.text = it
                 chip.typeface = resources.getFont(R.font.hack_regular)
-
                 addView(chip)
             }
         }
