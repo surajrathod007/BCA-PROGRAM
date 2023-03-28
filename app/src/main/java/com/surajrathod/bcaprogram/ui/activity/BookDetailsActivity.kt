@@ -14,6 +14,7 @@ import android.os.Environment
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.ui.text.toLowerCase
 import androidx.core.content.ContextCompat
 import com.google.android.material.chip.Chip
 import com.surajrathod.bcaprogram.R
@@ -30,6 +31,8 @@ import okhttp3.Request
 import java.io.Serializable
 import java.net.HttpURLConnection
 import java.net.URL
+import java.util.*
+import kotlin.collections.ArrayList
 import kotlin.math.floor
 
 class BookDetailsActivity : AppCompatActivity() {
@@ -70,7 +73,9 @@ class BookDetailsActivity : AppCompatActivity() {
             requestPermission()
             if(isRead && isWrite){
                 if(book != null){
-                    downloadFile(book!!.downloadLink,book!!.title.trim()+".pdf")
+                    val dLink = (book!!.downloadLink).substringAfter("^")
+                    val ext = (book!!.downloadLink).substringBefore("^")
+                    downloadFile(dLink,book!!.title.trim()+"."+ ext.lowercase(Locale.getDefault()))
                     Toast.makeText(this, "Downloading started...", Toast.LENGTH_SHORT).show()
                 } else{
                     Toast.makeText(this, "Book is null ;(", Toast.LENGTH_SHORT).show()
@@ -97,16 +102,19 @@ class BookDetailsActivity : AppCompatActivity() {
         binding.txtBookTitle.text = book.title
         var size = ""
         CoroutineScope(Dispatchers.IO).launch {
+            val dLink = (book.downloadLink).substringAfter("^")
+            val bExt = (book.downloadLink).substringBefore("^")
             val s =
-                getFileSize(book.downloadLink)
+                getFileSize(dLink)
             withContext(Dispatchers.Main) {
                 if (s < 1) {
                     size = String.format("%.2f", s * 1024) + " Kb"
-                    binding.txtBookDescription.text = book.description + "\nFile size : " + size
+                    binding.txtBookSize.text = size
                 } else {
                     size = String.format("%.2f", s) + " Mb"
-                    binding.txtBookDescription.text = book.description + "\nFile size : " + size
+                    binding.txtBookSize.text = size
                 }
+                binding.txtBookExtension.text = bExt
             }
         }
         binding.chipTags.apply {
