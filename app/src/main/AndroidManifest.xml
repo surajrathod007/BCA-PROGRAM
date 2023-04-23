@@ -2,8 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.surajrathod.bcaprogram">
 
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+
     <application
         android:name=".app"
         android:allowBackup="true"
@@ -13,13 +16,27 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BCAProgram">
         <activity
-            android:screenOrientation="portrait"
-            android:name=".ui.DescriptionActivity"
-            android:exported="false" />
+            android:name=".ui.activity.BookDetailsActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
         <activity
-            android:screenOrientation="portrait"
+            android:name=".ui.activity.BooksActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".ui.DescriptionActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".ui.MainActivity"
-            android:exported="true">
+            android:exported="true"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

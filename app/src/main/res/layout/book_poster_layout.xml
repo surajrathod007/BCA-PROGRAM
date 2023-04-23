@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:strokeWidth="1dp"
+    app:strokeColor="#663E416E"
+    android:elevation="0dp"
+    app:cardElevation="0dp"
+    android:layout_width="180dp"
+    android:layout_height="245dp"
+    app:cardCornerRadius="14dp"
+    android:layout_marginTop="4dp"
+    android:layout_marginLeft="8dp"
+    android:layout_marginBottom="4dp">
+
+    <ImageView
+        android:scaleType="centerCrop"
+        android:clickable="true"
+        android:focusable="true"
+        android:id="@+id/imgBookPosterDetails"
+        android:foreground="?attr/selectableItemBackground"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+</com.google.android.material.card.MaterialCardView>

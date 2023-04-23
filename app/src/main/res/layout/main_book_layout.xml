@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/imgBar"
+            android:layout_width="4dp"
+            android:layout_height="18dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="8dp"
+            android:foreground="@color/unit_color"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/txtBookSubjectRv"
+            android:layout_width="0dp"
+            app:layout_constraintEnd_toStartOf="@id/btnViewMoreBooks"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="6dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginRight="6dp"
+            android:fontFamily="@font/main_bold"
+            android:text="CC-101 HTML"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@id/imgBar"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/btnViewMoreBooks"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:layout_marginTop="11dp"
+            android:layout_marginRight="8dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?attr/selectableItemBackground"
+            android:src="@drawable/ic_baseline_arrow_forward_ios_24"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/unit_color" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvBooks"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="6dp"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintTop_toBottomOf="@id/imgBar"
+            tools:listitem="@layout/book_item_layout" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

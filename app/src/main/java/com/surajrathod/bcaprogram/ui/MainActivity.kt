@@ -27,6 +27,7 @@ import com.surajrathod.bcaprogram.R
 import com.surajrathod.bcaprogram.model.AppUpdate
 import com.surajrathod.bcaprogram.ui.fragments.DashboardFragment
 import com.surajrathod.bcaprogram.ui.fragments.FavouritesFragment
+import com.surajrathod.bcaprogram.ui.fragments.MaterialsFragment
 import com.surajrathod.bcaprogram.ui.fragments.ShareFragment
 import com.surajrathod.bcaprogram.utils.DataStoreConstants
 import com.surajrathod.bcaprogram.utils.TapTargetMaker
@@ -202,7 +203,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setUpViewPager(){
-        val fragmentList = listOf(DashboardFragment(),FavouritesFragment(),ShareFragment())
+        val fragmentList = listOf(DashboardFragment(),MaterialsFragment(),FavouritesFragment(),ShareFragment())
         fragmentContainerView.adapter = MainViewPagerAdapter(fragmentList,this)
         bottomNavigationView.setupWithViewPager2(fragmentContainerView)
       /*  TabLayoutMediator(bottomNavigationView,fragmentContainerView){tab,pos->

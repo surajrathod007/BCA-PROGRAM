@@ -3,6 +3,10 @@
 
     <item android:id="@+id/dashboardFragmentNew"
         android:title="Home" android:icon="@drawable/ic_baseline_home_24"  />
+    <item android:id="@+id/materialsFragment"
+        android:title="Materials"
+        android:icon="@drawable/ic_baseline_menu_book_24"
+        />
     <item
         android:id="@+id/favouritesFragment" android:title="Favorites"  android:icon="@drawable/ic_baseline_favorite_24" />
     <item
