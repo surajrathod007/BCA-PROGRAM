@@ -11,7 +11,6 @@
         android:id="@+id/scrollDescription"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="56dp"
         android:scrollbars="none">
 
         <androidx.appcompat.widget.LinearLayoutCompat
@@ -115,45 +114,6 @@
                         android:backgroundTint="@color/back_color"
                         android:backgroundTintMode="add" />
 
-
-                    <androidx.appcompat.widget.LinearLayoutCompat
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:weightSum="3">
-
-                        <com.google.android.material.button.MaterialButton
-                            android:layout_weight="1.3"
-                            android:id="@+id/btnCopyCode"
-                            style="@style/Widget.Material3.Button.OutlinedButton"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="10dp"
-                            android:fontFamily="@font/main_semibold"
-                            android:text="Copy"
-                            android:textSize="15sp" />
-
-                        <TextView
-                            android:layout_weight="1.7"
-                            android:id="@+id/btnShareProgram"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_marginEnd="16dp"
-                            android:background="@drawable/button_background_gradient"
-                            android:clickable="true"
-                            android:drawableRight="@drawable/ic_baseline_share_24"
-                            android:drawablePadding="12dp"
-                            android:drawableTint="@color/white"
-                            android:fontFamily="@font/main_bold"
-                            android:padding="12dp"
-                            android:gravity="center"
-                            android:paddingStart="24dp"
-                            android:text="Share"
-                            android:textColor="@color/white"
-                            android:textStyle="bold"
-                            android:tooltipText="Copy Program And Paste " />
-
-                    </androidx.appcompat.widget.LinearLayoutCompat>
 
                 </androidx.appcompat.widget.LinearLayoutCompat>
 

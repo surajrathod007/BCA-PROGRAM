@@ -43,7 +43,7 @@ class DescriptionFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_description, container, false)
         binding = FragmentDescriptionBinding.bind(view)
 
-        binding.btnCopyCode.setOnClickListener {
+        activity.binding.btnCopyCode.setOnClickListener {
             activity.copyTextToClipboard(data.content)
         }
 
@@ -63,8 +63,7 @@ class DescriptionFragment : Fragment() {
 
             activity.sendReport(send,subject,message)
         }
-        binding.btnShareProgram.setOnClickListener {
-
+        activity.binding.btnShareProgram.setOnClickListener {
             val intent = Intent()
             intent.action = Intent.ACTION_SEND
             intent.type = "text/plain"
