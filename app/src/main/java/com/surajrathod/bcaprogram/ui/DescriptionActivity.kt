@@ -4,40 +4,25 @@ import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
 import android.content.Intent
-import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.ViewCompositionStrategy
-import androidx.datastore.preferences.core.edit
-import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.lifecycle.ViewModelProvider
 import com.google.firebase.firestore.FirebaseFirestore
 
 import com.surajrathod.bcaprogram.R
+import com.surajrathod.bcaprogram.adapter.ProgramDescriptionViewPager
 import com.surajrathod.bcaprogram.databinding.ActivityDescriptionBinding
-import com.surajrathod.bcaprogram.model.AppUpdate
 import com.surajrathod.bcaprogram.model.ProgramEntity
-import com.surajrathod.bcaprogram.network.NetworkService
-import com.surajrathod.bcaprogram.ui.fragments.ShareFragment
-import com.surajrathod.bcaprogram.utils.DataStoreConstants
 import com.surajrathod.bcaprogram.viewmodel.FavouriteViewModel
 import kotlinx.android.synthetic.main.activity_description.*
-import kotlinx.android.synthetic.main.update_dialog_layout.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import me.everything.android.ui.overscroll.OverScrollDecoratorHelper
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import java.net.URL
-import java.util.regex.Pattern
 
 class DescriptionActivity : AppCompatActivity() {
 
@@ -52,44 +37,14 @@ class DescriptionActivity : AppCompatActivity() {
 
         //loadUpdate()
         val data = intent.getSerializableExtra("program") as com.surajrathod.bcaprogram.model.ProgramEntity
+        val dataList = intent.getSerializableExtra("programs") as ArrayList<*>
 
         binding = ActivityDescriptionBinding.inflate(layoutInflater)
 
         setContentView(binding.root)
         //setContentView(R.layout.activity_description)
-
-
-        binding.btnCopyCode.setOnClickListener {
-            copyTextToClipboard(data.content)
-        }
-
-        OverScrollDecoratorHelper.setUpOverScroll(binding.scrollDescription)
-
-        binding.marDown.setMarkDownText(data.content)
-
         favViewModel = ViewModelProvider(this@DescriptionActivity).get(FavouriteViewModel()::class.java)
         favViewModel.setUpDataBase(this)
-       GlobalScope.launch {  setFavIcon(data.id) }
-        //favViewModel.favDb.programDao().isFav(data.id).toString()
-
-
-        binding.reportProgram.setOnClickListener {
-            val send = "bcazone007@gmail.com"
-            val subject = "Report Program ${data.id}"
-            val message = "Hello, BCA Hub team , I Found an Error On Program Number ${data.id}"
-
-            sendReport(send,subject,message)
-        }
-        binding.btnShareProgram.setOnClickListener {
-
-            val intent = Intent()
-            intent.action = Intent.ACTION_SEND
-            intent.type = "text/plain"
-            intent.putExtra(Intent.EXTRA_TEXT,data.content + "\nHey i found an app where you can get all BCA Practical programs for free!! \n Download Now : $shareLink")
-            startActivity(Intent.createChooser(intent,"Share With Friends"))
-
-        }
-
 
         binding.btnFav.setOnClickListener {
 
@@ -108,19 +63,21 @@ class DescriptionActivity : AppCompatActivity() {
             }
         }
 
-        txtTitle.text = data.title.toString()
-        txtSem.text = data.sem.toString()
-        txtSub.text = data.sub.toString()
-        txtUnit.text = data.unit.toString()
-
-        println(data.toString())
-
         setSupportActionBar(favToolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_baseline_arrow_back_ios_24)
+
+        viewpager.adapter = ProgramDescriptionViewPager(
+            this,
+            data,
+            dataList,
+            supportFragmentManager,
+            lifecycle
+        )
+        viewpager.setCurrentItem(dataList.indexOf(data))
     }
 
-    private fun setFavIcon(data : Int){
+    fun setFavIcon(data : Int){
         val isFav = favViewModel.isFav(data)
        CoroutineScope(Dispatchers.Main).launch {  if(isFav) binding.btnFav.setImageDrawable(resources.getDrawable(R.drawable.ic_baseline_favorite_24))
        else binding.btnFav.setImageDrawable(resources.getDrawable(R.drawable.ic_baseline_favorite_border_24)) }
@@ -173,7 +130,7 @@ class DescriptionActivity : AppCompatActivity() {
         app = u
     }
 
-    private fun copyTextToClipboard(textToCopy : String) {
+    fun copyTextToClipboard(textToCopy : String) {
 
         val clipboardManager = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
         val clipData = ClipData.newPlainText("code", textToCopy)

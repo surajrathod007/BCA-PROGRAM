@@ -4,6 +4,7 @@ import android.app.Activity
 import android.app.ActivityOptions
 import android.content.Intent
 import android.os.Bundle
+import android.os.Parcelable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -47,8 +48,10 @@ class ProgramAdapter(private val list: List<ProgramEntity>,val vm : FavouriteVie
             title.text = if(program.title.length < 75) program.title
             else program.title.substring(0,75)+"..."
             item.setOnClickListener {
-               val intent = Intent(it.context,DescriptionActivity::class.java)
-                intent.putExtra("program",program)
+               val intent = Intent(it.context,DescriptionActivity::class.java).apply {
+                   putExtra("program",program)
+                   putExtra("programs",list as java.io.Serializable)
+               }
                 val options = ActivityOptions.makeSceneTransitionAnimation(it.context as Activity,holder.title,"title_transition")
                 it.context.startActivity(intent,options.toBundle())
             }

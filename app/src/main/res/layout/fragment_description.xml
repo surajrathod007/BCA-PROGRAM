@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.fragments.DescriptionFragment">
+
+    <ScrollView
+        android:id="@+id/scrollDescription"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="56dp"
+        android:scrollbars="none">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/txtTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:fontFamily="@font/main_regular"
+                android:text="Nothing fancy here "
+                android:textColor="@color/text_color_bold"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:transitionName="title_transition"/>
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/txtSem"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+
+                    android:background="@drawable/sem_bg"
+                    android:fontFamily="@font/main_bold"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    android:text="Sem 1"
+                    android:textColor="@color/sem_color" />
+
+                <TextView
+                    android:id="@+id/txtSub"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/sub_bg"
+                    android:fontFamily="@font/main_bold"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    android:text="DBMS"
+                    android:textColor="@color/sub_color" />
+
+                <TextView
+                    android:id="@+id/txtUnit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/unit_bg"
+                    android:clickable="true"
+                    android:fontFamily="@font/main_bold"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    android:text="Unit 1"
+                    android:textColor="@color/unit_color" />
+
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+            <TextView
+                android:clickable="true"
+                android:foreground="?attr/selectableItemBackground"
+                android:id="@+id/reportProgram"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:fontFamily="@font/main_semibold"
+                android:gravity="right"
+                android:text="Report Program"
+                android:textColor="#BAED1118" />
+
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:backgroundTint="@color/white"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="0dp">
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+
+                    <com.mukesh.MarkdownView
+
+                        android:layout_marginTop="10dp"
+                        android:id="@+id/marDown"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/action_bar_color"
+                        android:backgroundTint="@color/back_color"
+                        android:backgroundTintMode="add" />
+
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:weightSum="3">
+
+                        <com.google.android.material.button.MaterialButton
+                            android:layout_weight="1.3"
+                            android:id="@+id/btnCopyCode"
+                            style="@style/Widget.Material3.Button.OutlinedButton"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="10dp"
+                            android:fontFamily="@font/main_semibold"
+                            android:text="Copy"
+                            android:textSize="15sp" />
+
+                        <TextView
+                            android:layout_weight="1.7"
+                            android:id="@+id/btnShareProgram"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginEnd="16dp"
+                            android:background="@drawable/button_background_gradient"
+                            android:clickable="true"
+                            android:drawableRight="@drawable/ic_baseline_share_24"
+                            android:drawablePadding="12dp"
+                            android:drawableTint="@color/white"
+                            android:fontFamily="@font/main_bold"
+                            android:padding="12dp"
+                            android:gravity="center"
+                            android:paddingStart="24dp"
+                            android:text="Share"
+                            android:textColor="@color/white"
+                            android:textStyle="bold"
+                            android:tooltipText="Copy Program And Paste " />
+
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+            </androidx.cardview.widget.CardView>
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+    </ScrollView>
+
+</FrameLayout>
