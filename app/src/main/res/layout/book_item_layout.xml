@@ -19,6 +19,7 @@
         android:layout_marginBottom="4dp">
 
         <ImageView
+            android:scaleType="centerCrop"
             android:clickable="true"
             android:focusable="true"
             android:id="@+id/imgBookPoster"

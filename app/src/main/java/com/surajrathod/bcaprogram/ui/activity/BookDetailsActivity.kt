@@ -100,6 +100,7 @@ class BookDetailsActivity : AppCompatActivity() {
         }
         carousel.addAll(images as MutableList<CarouselModel>)
         binding.txtBookTitle.text = book.title
+        binding.txtBookDescription.text = book.description
         var size = ""
         CoroutineScope(Dispatchers.IO).launch {
             val dLink = (book.downloadLink).substringAfter("^")
